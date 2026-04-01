@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UPSC Expert Guide — Complete Study Resource</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1208;
+    --parchment: #f5f0e8;
+    --parchment-dark: #ede5d0;
+    --gold: #c9952a;
+    --gold-light: #e8b84b;
+    --saffron: #d4531a;
+    --teal: #1a5c6b;
+    --teal-light: #2a8a9c;
+    --emerald: #1a6b3a;
+    --ruby: #8b1a1a;
+    --indigo: #2a1a6b;
+    --sidebar-w: 300px;
+    --header-h: 64px;
+    --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Source Serif 4', Georgia, serif; background: var(--parchment); color: var(--ink); min-height: 100vh; overflow-x: hidden; }
+  #header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: var(--header-h); background: var(--ink); display: flex; align-items: center; gap: 16px; padding: 0 24px; border-bottom: 3px solid var(--gold); box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+  #header .logo { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 900; color: var(--gold); letter-spacing: 0.5px; white-space: nowrap; }
+  #header .logo span { color: var(--parchment); }
+  #header .subtitle { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #a09070; letter-spacing: 1px; white-space: nowrap; }
+  #hamburger { display: none; background: none; border: none; cursor: pointer; padding: 6px; color: var(--gold); }
+  #hamburger svg { width: 24px; height: 24px; }
+  #header .search-bar { flex: 1; max-width: 400px; margin-left: auto; position: relative; }
+  #search-input { width: 100%; padding: 8px 36px 8px 14px; background: rgba(255,255,255,0.08); border: 1px solid rgba(201,149,42,0.3); border-radius: 6px; color: var(--parchment); font-family: 'Source Serif 4', serif; font-size: 13px; outline: none; transition: border-color var(--transition); }
+  #search-input::placeholder { color: #806850; }
+  #search-input:focus { border-color: var(--gold); }
+  .search-icon { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #806850; pointer-events: none; }
+  #search-results { position: absolute; top: calc(100% + 6px); left: 0; right: 0; background: var(--ink); border: 1px solid var(--gold); border-radius: 8px; max-height: 280px; overflow-y: auto; display: none; z-index: 200; box-shadow: 0 8px 24px rgba(0,0,0,0.5); }
+  #search-results.active { display: block; }
+  .search-result-item { padding: 10px 16px; cursor: pointer; border-bottom: 1px solid rgba(201,149,42,0.1); font-size: 13px; color: var(--parchment); transition: background var(--transition); }
+  .search-result-item:hover { background: rgba(201,149,42,0.15); }
+  .search-result-item .subject-tag { font-size: 10px; color: var(--gold); font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.5px; }
+  #layout { display: flex; margin-top: var(--header-h); min-height: calc(100vh - var(--header-h)); }
+  #sidebar { width: var(--sidebar-w); min-height: calc(100vh - var(--header-h)); background: #120e08; border-right: 2px solid rgba(201,149,42,0.2); overflow-y: auto; position: sticky; top: var(--header-h); max-height: calc(100vh - var(--header-h)); flex-shrink: 0; transition: transform var(--transition); }
+  #sidebar::-webkit-scrollbar { width: 4px; }
+  #sidebar::-webkit-scrollbar-track { background: transparent; }
+  #sidebar::-webkit-scrollbar-thumb { background: rgba(201,149,42,0.3); border-radius: 2px; }
+  .subject-section { border-bottom: 1px solid rgba(201,149,42,0.1); }
+  .subject-btn { width: 100%; background: none; border: none; padding: 14px 20px; cursor: pointer; display: flex; align-items: center; gap: 10px; text-align: left; font-family: 'Source Serif 4', serif; font-size: 13px; font-weight: 600; color: var(--parchment-dark); transition: all var(--transition); position: relative; }
+  .subject-btn::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: transparent; transition: background var(--transition); }
+  .subject-btn:hover, .subject-btn.active { color: var(--gold); background: rgba(201,149,42,0.08); }
+  .subject-btn.active::before { background: var(--gold); }
+  .subject-icon { font-size: 16px; flex-shrink: 0; }
+  .subject-arrow { margin-left: auto; font-size: 10px; opacity: 0.6; transition: transform var(--transition); }
+  .subject-btn.open .subject-arrow { transform: rotate(90deg); }
+  .topic-list { display: none; background: rgba(0,0,0,0.3); border-left: 2px solid rgba(201,149,42,0.15); margin-left: 20px; }
+  .topic-list.open { display: block; }
+  .topic-btn { width: 100%; background: none; border: none; padding: 9px 16px 9px 14px; cursor: pointer; text-align: left; font-family: 'Source Serif 4', serif; font-size: 12px; color: #9a8870; transition: all var(--transition); line-height: 1.4; }
+  .topic-btn:hover { color: var(--gold-light); background: rgba(201,149,42,0.05); }
+  .topic-btn.active { color: var(--gold); font-weight: 600; }
+  #main { flex: 1; padding: 40px 48px; max-width: 900px; min-height: calc(100vh - var(--header-h)); }
+  #welcome { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; text-align: center; padding: 40px 20px; }
+  #welcome .emblem { width: 100px; height: 100px; border-radius: 50%; background: conic-gradient(var(--gold) 0deg, var(--saffron) 120deg, var(--teal) 240deg, var(--gold) 360deg); display: flex; align-items: center; justify-content: center; font-size: 40px; margin-bottom: 32px; box-shadow: 0 0 40px rgba(201,149,42,0.3); animation: spin-slow 20s linear infinite; }
+  @keyframes spin-slow { to { transform: rotate(360deg); } }
+  #welcome h1 { font-family: 'Playfair Display', serif; font-size: 38px; font-weight: 900; color: var(--ink); line-height: 1.2; margin-bottom: 16px; }
+  #welcome h1 span { color: var(--saffron); }
+  #welcome p { font-size: 16px; color: #5a4a3a; max-width: 540px; line-height: 1.7; margin-bottom: 32px; }
+  .subjects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; width: 100%; max-width: 700px; margin-top: 8px; }
+  .subject-card { background: white; border: 1px solid rgba(201,149,42,0.2); border-radius: 10px; padding: 14px; cursor: pointer; text-align: center; transition: all var(--transition); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .subject-card:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(201,149,42,0.15); }
+  .subject-card .icon { font-size: 22px; margin-bottom: 6px; }
+  .subject-card .name { font-size: 12px; font-weight: 600; color: var(--ink); }
+  #content-area { display: none; }
+  #content-area.active { display: block; }
+  .breadcrumb { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8a7060; margin-bottom: 24px; letter-spacing: 0.5px; }
+  .breadcrumb span { color: var(--gold); }
+  #content-header { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 2px solid rgba(201,149,42,0.2); }
+  #content-header .subject-label { display: inline-block; background: var(--gold); color: white; padding: 3px 12px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+  #content-title { font-family: 'Playfair Display', serif; font-size: 34px; font-weight: 900; color: var(--ink); line-height: 1.2; margin-bottom: 12px; }
+  #content-meta { font-size: 13px; color: #8a7060; font-style: italic; }
+  #loading-state { display: none; text-align: center; padding: 60px 20px; }
+  #loading-state.active { display: block; }
+  .loader-ring { display: inline-block; width: 64px; height: 64px; border: 4px solid rgba(201,149,42,0.1); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.9s linear infinite; margin-bottom: 20px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  #loading-state p { font-size: 14px; color: #8a7060; font-style: italic; animation: pulse 1.5s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:0.5} 50%{opacity:1} }
+  #content-body { font-size: 15.5px; line-height: 1.85; color: #2a1f14; }
+  #content-body h2 { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--teal); margin: 36px 0 14px; padding-bottom: 8px; border-bottom: 2px solid rgba(26,92,107,0.2); }
+  #content-body h3 { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--saffron); margin: 28px 0 10px; }
+  #content-body h4 { font-size: 15px; font-weight: 600; color: var(--ink); margin: 20px 0 8px; text-transform: uppercase; letter-spacing: 0.5px; font-family: 'JetBrains Mono', monospace; }
+  #content-body p { margin-bottom: 16px; }
+  #content-body ul, #content-body ol { padding-left: 24px; margin-bottom: 16px; }
+  #content-body li { margin-bottom: 6px; }
+  #content-body strong { color: var(--ink); font-weight: 600; }
+  #content-body em { color: var(--saffron); font-style: italic; }
+  #content-body blockquote { border-left: 4px solid var(--gold); padding: 16px 20px; background: rgba(201,149,42,0.06); border-radius: 0 8px 8px 0; margin: 24px 0; font-style: italic; color: #4a3a28; }
+  #content-body .info-box { background: rgba(26,92,107,0.06); border: 1px solid rgba(26,92,107,0.2); border-radius: 10px; padding: 20px 24px; margin: 24px 0; }
+  #content-body .info-box .box-title { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; color: var(--teal); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+  #content-body table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; }
+  #content-body th { background: var(--ink); color: var(--gold); padding: 10px 14px; text-align: left; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; }
+  #content-body td { padding: 10px 14px; border-bottom: 1px solid rgba(201,149,42,0.1); vertical-align: top; }
+  #content-body tr:nth-child(even) td { background: rgba(201,149,42,0.04); }
+  #content-body .pyq-box { background: linear-gradient(135deg,rgba(139,26,26,0.05),rgba(139,26,26,0.02)); border: 1px solid rgba(139,26,26,0.2); border-radius: 10px; padding: 20px 24px; margin: 28px 0; }
+  #content-body .pyq-box .pyq-title { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ruby); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; font-weight: 500; }
+  #content-body .pyq-item { font-size: 13.5px; color: #4a2828; padding: 8px 0; border-bottom: 1px solid rgba(139,26,26,0.1); line-height: 1.5; }
+  #content-body .pyq-item:last-child { border-bottom: none; }
+  #content-body .pyq-year { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--ruby); font-weight: 500; margin-right: 8px; }
+  #error-state { display: none; padding: 40px 20px; text-align: center; }
+  #error-state.active { display: block; }
+  #error-state h3 { color: var(--ruby); margin-bottom: 12px; }
+  #error-state p { color: #6a5a4a; font-size: 14px; }
+  #sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 89; }
+  #back-top { position: fixed; bottom: 24px; right: 24px; width: 44px; height: 44px; background: var(--gold); color: white; border: none; border-radius: 50%; cursor: pointer; font-size: 18px; box-shadow: 0 4px 12px rgba(201,149,42,0.4); display: none; align-items: center; justify-content: center; transition: all var(--transition); z-index: 50; }
+  #back-top:hover { background: var(--saffron); transform: translateY(-2px); }
+  #back-top.visible { display: flex; }
+  #progress-bar { position: fixed; top: var(--header-h); left: 0; height: 3px; background: var(--gold); width: 0%; transition: width 0.1s; z-index: 99; }
+  @media (max-width: 768px) {
+    #hamburger { display: block; }
+    #sidebar { position: fixed; top: var(--header-h); left: 0; bottom: 0; z-index: 90; transform: translateX(-100%); }
+    #sidebar.open { transform: translateX(0); }
+    #sidebar-overlay { display: block; opacity: 0; pointer-events: none; transition: opacity var(--transition); }
+    #sidebar-overlay.active { opacity: 1; pointer-events: all; }
+    #main { padding: 24px 20px; }
+    #content-title { font-size: 26px; }
+    .subjects-grid { grid-template-columns: repeat(2,1fr); }
+  }
+</style>
+</head>
+<body>
+
+<header id="header">
+  <button id="hamburger" aria-label="Menu">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+  </button>
+  <div class="logo">UPSC <span>Expert Guide</span></div>
+  <div class="subtitle">QUEST NOTES • ALL SUBJECTS</div>
+  <div class="search-bar">
+    <input type="text" id="search-input" placeholder="Search topics...">
+    <span class="search-icon">⌕</span>
+    <div id="search-results"></div>
+  </div>
+</header>
+
+<div id="progress-bar"></div>
+<div id="sidebar-overlay"></div>
+
+<div id="layout">
+  <nav id="sidebar"></nav>
+  <main id="main">
+    <div id="welcome">
+      <div class="emblem">🏛️</div>
+      <h1>UPSC <span>Expert Guide</span></h1>
+      <p>A comprehensive, AI-powered study resource covering all subjects of the UPSC Civil Services Examination. Select any subject and topic to get detailed theoretical content.</p>
+      <div class="subjects-grid" id="welcome-grid"></div>
+    </div>
+    <div id="content-area">
+      <div class="breadcrumb" id="breadcrumb"></div>
+      <div id="content-header">
+        <div class="subject-label" id="subject-label"></div>
+        <h1 id="content-title"></h1>
+        <div id="content-meta"></div>
+      </div>
+      <div id="loading-state">
+        <div class="loader-ring"></div>
+        <p id="loading-msg">Generating comprehensive notes…</p>
+      </div>
+      <div id="error-state">
+        <h3>⚠ Content could not be loaded</h3>
+        <p id="error-msg"></p>
+      </div>
+      <div id="content-body"></div>
+    </div>
+  </main>
+</div>
+
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+const SUBJECTS = [
+  { id:'ancient-history', name:'Ancient History', icon:'🏺', color:'#c9952a', topics:['Prehistoric Period in India — Culture, Tools and Sites','Indus Valley Civilization — Origin, Sites, Town Planning, Trade, Religion','Vedic Period — Early & Later Vedic, Social Economic Political Religious Life','Mahajanapadas — 16 Kingdoms, Political Developments','Buddhism — Life of Buddha, Teachings, Schools, Spread, Decline','Jainism — Mahavira, Doctrines, Contribution','Mauryan Empire — Chandragupta, Bindusara, Ashoka, Administration, Art','Post-Mauryan Period — Shungas, Kanvas, Satavahanas, Indo-Greeks, Kushanas, Sakas','Gupta Empire — Administration, Economy, Society, Art, Culture, Science','Post-Gupta Period — Harsha, Regional Powers','Foreign Travellers who visited India — Megasthenes, Fa-Hien, Xuanzang, Al-Biruni'] },
+  { id:'medieval-history', name:'Medieval History', icon:'🕌', color:'#8b4513', topics:['Tripartite Struggle — Gurjara-Pratiharas, Palas, Rashtrakutas','Medieval Kingdoms of North India — Paramaras, Chandelas, Kalachuris, Sisodiyas','Medieval Kingdoms of Deccan and South India — Chalukyas, Rashtrakutas, Cholas, Pallavas','Vijayanagara Empire — Foundation, Administration, Economy, Art, Literature','Foreign Invasions during Medieval Period — Arab, Turkish, Mongol Invasions','Delhi Sultanate — Slave, Khilji, Tughlaq, Sayyid, Lodi Dynasties, Administration','Mughal Empire — Babur to Aurangzeb, Administration, Economy, Culture, Art','Religious Movements in Medieval India — Bhakti Movement, Sufism, Sants'] },
+  { id:'modern-history', name:'Modern History', icon:'🏴', color:'#1a5c6b', topics:['Advent of Europeans in India — Portuguese, Dutch, French, British','British Rule in India — Colonialism, Expansion, Policies','Acts and Regulations under East India Company — Regulating Act to 1858','British Policies in India — Economic, Administrative, Social','List of Governors General of Bengal and India','Civil Uprisings before 1857 — Polygar War, Paika Rebellion, Sanyasi Revolt','Tribal Movements in India — Santhal, Munda, Bhil, Kol Revolts','Revolt of 1857 — Causes, Centres, Leaders, Consequences','Indian National Congress — Foundation, Moderate Phase, Sessions','Peasant Movements — Indigo, Deccan Riots, Champaran, Bardoli','Socio-Religious Reform Movements — Brahmo Samaj, Arya Samaj, Aligarh Movement','Extremist Phase of INC — Lal-Bal-Pal Trio, Surat Split','Swadeshi Movement — Causes, Programmes, Impact','Mahatma Gandhi Movements — Philosophy, Mass Movements, Legacy','Home Rule Movement — Tilak, Besant, Significance','Non-Cooperation Movement — 1920-22, Chauri Chaura, Impact','Civil Disobedience Movement — Dandi March, Salt Satyagraha, Round Table Conferences','Revolutionary Movements in India — HSRA, Bhagat Singh, Subhas Chandra Bose','Communist Party of India — Formation, Role in Freedom Struggle','Quit India Movement — August Kranti, Role of People, Aftermath','Freedom Fighters of India — Key Personalities and Contributions'] },
+  { id:'world-history', name:'World History', icon:'🌍', color:'#2a6b1a', topics:['Renaissance — Causes, Features, Key Figures, Impact on Art and Thought','Industrial Revolution — Britain, Causes, Phases, Social Impact, Spread','American Revolution — Causes, Course, Constitution, Impact','French Revolution — 1789, Causes, Phases, Terror, Napoleonic Era','Rise of Nationalism in Europe — Romanticism, Revolutions of 1848, Unification','Imperialism — Theories, European Colonialism, Scramble for Africa','World War 1 — Causes, Major Battles, Alliances, Consequences, Treaty of Versailles','Russian Revolution — 1905, February 1917, October Revolution, Bolshevism','Inter-War Period — Great Depression, Fascism, Nazism, Rise of Hitler','World War 2 — Causes, Major Theatres, Holocaust, End, UN Formation','United Nations — Structure, Organs, Specialised Agencies, Reforms','Cold War — Origins, Phases, Key Events, Arms Race, End','Decolonisation — Asia, Africa, NAM, Challenges of New Nations','Dissolution of the Soviet Union — Gorbachev, Glasnost, Perestroika, CIS'] },
+  { id:'post-independence', name:'Post-Independence India', icon:'🇮🇳', color:'#d4531a', topics:['Partition of India — Causes, Mountbatten Plan, Communal Violence, Refugees','Integration of Princely States — Sardar Patel, Instrument of Accession, Hyderabad, Junagadh, Kashmir','Reorganisation of States — States Reorganisation Act 1956, SRC, Linguistic States','Land Reforms in India — Abolition of Zamindari, Tenancy Reforms, Ceiling Laws','Evolution of Indian Economy — Pre and Post-Liberalisation, Planning to Market','Nehruvian Foreign Policy — NAM, Panchsheel, India-China, Korea War stance','Lal Bahadur Shastri — 1965 War, Tashkent, Green Revolution, Jai Jawan Jai Kisan','Indira Gandhi — Nationalisation, Emergency, Garibi Hatao, 1971 War','Coalition Government Era — VP Singh to UPA-NDA cycles, Political Changes'] },
+  { id:'art-culture', name:'Art and Culture', icon:'🎭', color:'#6b1a6b', topics:['Indian Architecture — Rock-cut, Structural, Cave, Temple, Mosque, Secular','Temple Architecture — Nagara, Dravida, Vesara Styles, Key Temples','Indian Paintings — Ajanta, Mughal, Rajput, Pahari, Company, Modern Schools','Pilgrimage Sites in India — Char Dham, Jyotirlingas, Shakti Peethas, Buddhist Sites','Famous Universities of Ancient India — Nalanda, Takshashila, Vikramshila','Schools of Indian Philosophy — Orthodox and Heterodox Systems','Ancient Indian Literature — Vedas, Upanishads, Epics, Puranas, Sangam Literature','Indian Languages — Families, Classical Languages, 8th Schedule Languages','Performing Arts — Classical Dances, Music, Folk Forms','Indian Cinema — Historical Development, Regional Cinema, Awards'] },
+  { id:'geography', name:'Geography', icon:'🗺️', color:'#1a6b3a', topics:['Indian Geography — Location, Physiographic Divisions, Northern Plains, Peninsular Plateau','Climate of India — Monsoon Mechanism, Seasons, Regional Variations, Cyclones','Drainage System of India — Himalayan Rivers, Peninsular Rivers, Inter-linking Projects','The Universe — Origin, Solar System, Earth in Space, Big Bang Theory','Interior of the Earth — Layers, Seismic Waves, Plate Tectonics','Geomorphology — Weathering, Erosion, Landforms: Plains, Plateaus, Mountains','Climatology — Atmosphere, Pressure Belts, Wind Systems, Precipitation','Forests in India — Types, Characteristics, Forest Policy, Deforestation','Oceanography — Ocean Currents, Tides, ENSO, Marine Resources, Ocean Floor','Economic Geography — Resources, Agriculture, Industries, Trade, Transport','Human Geography — Population Distribution, Migration, Urbanisation, Settlement','Natural Vegetation of India — Tropical, Subtropical, Temperate, Alpine'] },
+  { id:'indian-society', name:'Indian Society', icon:'👥', color:'#5c1a6b', topics:['Salient Features of Indian Society — Diversity, Unity in Diversity, Social Structure','Diversity in India — Linguistic, Religious, Cultural, Regional, Ethnic Diversity','Role of Women in India — Status, Movements, Legal Provisions, Organisations','Population and Associated Issues — Demographics, Fertility, Migration, Ageing','Poverty and Developmental Issues — Measurement, Causes, Schemes','Urbanisation in India — Urban Growth, Slums, Smart Cities, Urban Governance','Globalisation — Economic, Cultural, Political Effects on India','Social Empowerment — Reservation, Affirmative Action, SHGs, Skill Development','Communalism in India — Origins, Types, Role of State, Secular Institutions','Regionalism in India — Causes, Secessionism, Sub-Nationalism, Centre-State Tensions','Secularism in India — Constitutional Provisions, Debates, Challenges','Migration in India — Internal, International, Labour Migration, Issues','Caste System in India — Origins, Varna, Jati, Untouchability, Mandal Commission','Marriage in India — Forms, Laws, Special Marriage Act, Child Marriage','Issues relating to Sex Ratio — Female Foeticide, Beti Bachao, Data Analysis','Tribal Societies in India — Distribution, Issues, 5th and 6th Schedules, PESA, FRA'] },
+  { id:'polity', name:'Polity', icon:'⚖️', color:'#1a2a6b', topics:['Indian Constitution — Making, Philosophy, Sources, Salient Features','Significant Provisions of Indian Constitution — Key Articles, Amendments','Schedules of Indian Constitution — All 12 Schedules Explained','Preamble of Indian Constitution — Significance, Keywords, Amendments','Union and its Territory — Admission, Formation of States, Article 1-4','Citizenship — Acquisition, Termination, Overseas, CAA','Fundamental Rights — Articles 12-35, Scope, Limitations, Case Laws','Directive Principles of State Policy — Classification, Implementation, Conflicts with FRs','Fundamental Duties — Article 51A, Significance, Legal Enforceability','Union Executive — President, Vice President, Prime Minister, Cabinet, CoM','Federalism in India — Features, Centre-State Relations, Cooperative Federalism','Emergency Provisions — National, State, Financial Emergency; Impact','Parliament of India — Structure, Powers, Functions, Committees, Sessions','Union Budget — Concepts, Budget Process, Types of Budgets, Fiscal Federalism','State Executive — Governor, Chief Minister, Council of Ministers','State Legislature — Unicameral vs Bicameral, Speaker, Powers','Indian Judiciary — Supreme Court, High Courts, Judicial Review, PIL, ADR','Tribunals — Types, CAT, NGT, Armed Forces Tribunal','Local Government in India — 73rd and 74th Amendments, Panchayati Raj, Urban Bodies','Elections in India — ECI, Electoral Rolls, EVM, Electoral Bonds, Party Funding','Constitutional Bodies — CAG, UPSC, Election Commission, Finance Commission','Statutory and Non-Constitutional Bodies — NHRC, CBI, CVC, Lokpal, Lokayukta','Regulatory Bodies in India — RBI, SEBI, TRAI, IRDAI, FSSAI','Pressure Groups — Meaning, Types, Techniques, Role in Democracy','Important Supreme Court Judgements — Landmark Cases and their Significance','Recent Bills Passed in Parliament — Key Legislations and their Implications'] },
+  { id:'governance', name:'Governance', icon:'🏛️', color:'#3a6b1a', topics:['Government Policies and Interventions — Flagship Schemes, Welfare Programmes','Public Policy — Policy Making Process, Evaluation, Implementation Challenges','Rural Development — Schemes, Infrastructure, PURA, PMGSY, Aspirational Districts','Urban Development in India — Smart Cities, AMRUT, HRIDAY, Urban Poverty','Agriculture Policy in India — MSP, Subsidies, APMC, e-NAM, Farm Laws','Role of NGOs in Social Welfare — Types, Functions, Challenges, Regulation','Self-Help Groups — SHG Model, NABARD, Microfinance, NRLM, Impact','Governance in India — E-Governance, Citizen Charters, RTI, Good Governance','Role of Civil Services in Democracy — Neutrality, Accountability, Reform Committees','India\'s Ranking in Different Indexes — HDI, GII, EDB, CPI, GHI, Press Freedom'] },
+  { id:'social-justice', name:'Social Justice', icon:'⚡', color:'#6b3a1a', topics:['Social Security in India — Concept, Schemes, ESIC, NPS, PM-JAY, PMJJBY','Welfare Schemes for Vulnerable Sections — Overview and Analysis','Women — Gender Justice, Domestic Violence, POSH Act, Women Empowerment','Children — Child Labour, POCSO, Education, ICDS, Mid-Day Meal','Minorities in India — Constitutional Protections, Issues, NCM','Scheduled Castes — Atrocities Act, Reservation, Issues, Government Initiatives','Scheduled Tribes — PESA, Forest Rights Act, Displacement, Development','Persons with Disability — RPWD Act 2016, Rights, Accessibility, Schemes','Elderly People — Senior Citizens Act, Age Care, Schemes','Health Sector in India — Public Health, NHP, Ayushman Bharat, Mental Health','Education Sector in India — NEP 2020, RTE, Higher Education, Skill India','Human Resource Development — Skill India, NSDC, Digital India, Literacy','Poverty — Measurement, Multidimensional Poverty, Schemes, Progress','Hunger — GHI, Food Security Act, PDS, Malnutrition, POSHAN Abhiyan'] },
+  { id:'international-relations', name:'International Relations', icon:'🌐', color:'#1a4a6b', topics:['Indian Foreign Policy — Evolution, Core Principles, Strategic Autonomy','India and Neighbourhood Relations — Nepal, Bangladesh, Sri Lanka, Pakistan, Afghanistan, Bhutan, Maldives','Bilateral Relations — India-USA, India-Russia, India-China, India-EU, India-Japan, India-Australia','Regional Groupings — SAARC, BIMSTEC, SCO, BRICS, G20, ASEAN, EAS','United Nations — Structure, India\'s Role, Security Council Reform, Peacekeeping','International Organizations — IMF, World Bank, WTO, IAEA, WHO, ILO','Geopolitics — Arctic, Indo-Pacific, BRI, Quad, I2U2, AUKUS, Multilateralism','Indian Diaspora — Size, Contributions, PIO, OCI, Diaspora Policy, Soft Power'] },
+  { id:'economics', name:'Economics', icon:'📈', color:'#6b5c1a', topics:['Indian Economy — Features, Structure, Mixed Economy, Reform Journey','National Income — GDP, GNP, NDP, NNP, Measurement Methods, Deflator','Capital Markets — Primary and Secondary Markets, SEBI, Instruments','Equity Market — Share Market, Stock Exchanges, Mutual Funds, FPI/FDI','PFRDA — Pension Reforms, NPS, APY, Pension Fund Architecture','Five Year Plans in India — Planning Commission, NITI Aayog, Plan Periods','Money and Banking — Money Supply, RBI Functions, Credit Policy, NBFCs','Fiscal Policy — Budget, Taxation, Subsidies, Deficit Financing, FRBM Act','Taxation in India — Direct and Indirect Taxes, GST, IT, Corporate Tax','Inclusive Growth — Concept, Issues, Pro-poor Policies, Gini Coefficient','Inflation — Types, Measurement, CPI vs WPI, RBI Monetary Policy, Stagflation','External Sector — Balance of Payments, Current Account Deficit, Forex Reserves','Infrastructure — Roads, Rail, Power, Ports, NIP, PPP Model','Energy Sector in India — Coal, Oil, Gas, Renewables, NEP, Solar Mission','Transport Sector in India — Road, Rail, Civil Aviation, Waterways','Industrial Sector — MSMEs, PLI, Industrial Policy, Make in India','Employment in India — Labour Market, PLFS Data, Unemployment Types, Code on Wages','Investment Models — PPP, HAM, Swiss Challenge, FDI, FII','International Financial Institutions — IMF, World Bank Group, ADB, NDB'] },
+  { id:'agriculture', name:'Agriculture', icon:'🌾', color:'#3a6b3a', topics:['Indian Agriculture — Overview, Significance, GDP Share, Challenges, Reforms','Major Types of Crops in India — Kharif, Rabi, Zaid; Cereals, Pulses, Cash Crops','Cropping Patterns — Crop Rotation, Mixed Cropping, Intercropping, Shifting','Irrigation in India — Types, Major Projects, PMKSY','Economics of Animal Rearing — Dairying, Poultry, Fisheries, Blue Revolution','Agriculture Storage and Transportation — Cold Chain, Warehousing, FCI','Agriculture Marketing — APMCs, e-NAM, Farmer Cooperatives, Contract Farming','Farm Subsidies in India — Fertilizer, Power, Water, MSP, Issues and Reform','Public Distribution System — History, TPDS, NFSA, Aadhaar Seeding, DBT','Technology Missions in Agriculture — NMSA, ATMA, Digital Agriculture','Sustainable Agriculture — Organic Farming, Natural Farming, Zero Budget','Food Processing Industry — Significance, MOFPI Schemes, Cold Chain, FDI','Agriculture Schemes and Farmers Welfare — PM-KISAN, PMFBY, KCC, e-Kisan'] },
+  { id:'environment', name:'Environment', icon:'🌿', color:'#1a5c2a', topics:['Environment — Biosphere, Ecology Basics, Habitat, Niche, Ecological Succession','Ecosystem — Structure, Functions, Food Web, Energy Flow, Biogeochemical Cycles','Aquatic Ecosystem — Marine, Freshwater, Wetlands, Coral Reefs, Mangroves','Environmental Pollution — Air, Water, Soil, Noise, Light, Radioactive Pollution','Water Management — Water Conservation, Watershed Management, Interlinking Rivers','Environmental Degradation — Deforestation, Desertification, Land Degradation','Environmental Impact Assessment — EIA Process, Public Hearing, Notification','Waste Management — Solid Waste, Biomedical, E-Waste, Plastic Waste Rules','Biodiversity — Levels, Hotspots, Threats, Convention on Biological Diversity, IPBES','Climate Change — Greenhouse Effect, IPCC, Paris Agreement, NDCs, Mitigation, Adaptation','Environmental Conventions and Protocols — Montreal, Kyoto, Ramsar, CITES, CBD','Environment Movements in India — Chipko, Silent Valley, Narmada, Bishnoi'] },
+  { id:'science-tech', name:'Science & Technology', icon:'🔬', color:'#1a2a5c', topics:['Achievements of India in Science and Technology — ISRO, DRDO, DAE, CSIR Milestones','Information and Communication Technology — Internet, 5G, Cloud, Cybersecurity Policy','Space Technology — Missions, Launch Vehicles, ISRO Programs, Commercial Space','Robotics — Types, Applications, Industry 4.0, AI in Robotics','Nanotechnology — Concepts, Applications in Medicine, Agriculture, Energy','Biotechnology — Genetic Engineering, GMOs, CRISPR, Biopharma, Biosafety','Defence Technology — Missiles, Fighter Jets, Indigenous Defence, DRDO, DPP','Nuclear Technology — Civilian Nuclear Programme, Reactors, NPT, CTBT','Emerging Technologies — AI, Machine Learning, Blockchain, Quantum Computing','Clean Technology — Solar, Wind, Hydrogen, Green Hydrogen, Carbon Capture','Intellectual Property Rights — Types, TRIPS, Patents, Copyrights, GI Tags','Developments in Science and Technology — Recent Breakthroughs and Policy Implications','Nobel Prize — History, Categories, Indian Winners, Recent Awards','General Science — Basic Physics, Chemistry, Biology for UPSC','Chemistry Concepts — Periodic Table, Acids-Bases, Polymers, Environmental Chemistry','Biology for UPSC — Cell Biology, Genetics, Human Physiology, Disease, Nutrition','Materials and Display Technology — Semiconductors, OLED, Solar Cells, Smart Materials'] },
+  { id:'disaster-management', name:'Disaster Management', icon:'🌊', color:'#5c1a1a', topics:['Disaster — Definition, Vulnerability, Types, Disaster Risk Reduction','Disaster Management in India — Legal Framework, Institutional Structure, NDRF','Earthquakes in India — Seismic Zones, Vulnerability, Preparedness, Mitigation','Tsunami — Causes, Indian Ocean Tsunami 2004, Early Warning Systems, Mitigation','Floods in India — Causes, Flood Plains, Impacts, National Flood Risk Mitigation','Heat Waves — Causes, Health Impact, IMD Alerts, Cooling Centres','Cold Waves — Causes, Impact, Preventive Measures, Fog','Landslides — Causes, Vulnerable Zones, Mitigation Strategies','Cyclone — Formation, Classification, Impact on India, IMD Monitoring, Preparedness','Forest Fires — Causes, Types, Impact, Forest Survey of India, Management','Disaster Management Act 2005 — Key Provisions, Authorities, NDMA, SDMA','National Disaster Management Authority — NDMA Structure, Functions, National Plans','CDRI — Coalition for Disaster Resilient Infrastructure, G20 Initiative, Significance'] },
+  { id:'internal-security', name:'Internal Security', icon:'🛡️', color:'#3a1a5c', topics:['India\'s National Security — Concept, Threats, NSA, NSC, NSCS','Challenges to India\'s Internal Security — Left Wing Extremism, NE Insurgency, J&K','Linkages between Development and Extremism — Poverty, Alienation, Governance Deficit','Terrorism in India — Types, Groups, State-Sponsored Terror, Counter-Terrorism','Cybersecurity — Threats, Cyberwar, CERT-In, IT Act, National Cybersecurity Policy','PMLA 2002 — Money Laundering, ED, Financial Intelligence Unit, FATF','Border Management — Land Borders, Coastal Security, Smart Fencing, BPF, SSB','Security Forces and Agencies — CRPF, BSF, NSG, IB, RAW, NIA, CBI','National Investigation Agency — Powers, Cases, Amendments to NIA Act','UAPA — Unlawful Activities Prevention Act, Amendments, Criticism','Military Exercises — Bilateral, Multilateral; Key India-specific Exercises'] },
+  { id:'ethics', name:'Ethics', icon:'🧭', color:'#4a1a4a', topics:['Ethics and Human Interface — Meaning, Determinants, Essence, Moral Dilemmas','Dimensions of Ethics — Meta-ethics, Normative Ethics, Applied Ethics, Descriptive Ethics','Applied Ethics — Medical, Environmental, Business, Political, Administrative Ethics','Human Values — Lessons from Lives of Great Leaders, Values in Public Life','Attitude — Components, Structure, Functions, Moral and Political Attitudes','Aptitude and Foundational Values of Civil Services — Integrity, Impartiality, Empathy, Objectivity','Emotional Intelligence — Concept, Components, Applications in Governance','Contribution of Moral Thinkers from India — Kautilya, Gandhi, Vivekananda, Ambedkar, Tagore','Contribution of Moral Thinkers from World — Plato, Aristotle, Kant, Rawls, Bentham, Mill','Public/Civil Service Values and Ethics in Public Administration — Accountability, Responsiveness','Probity in Governance — Integrity, Transparency, RTI, Vigilance, Code of Conduct','Case Study — Framework for Analysis, Common Dilemma Patterns, Approach','Ethical Concepts — Virtue Ethics, Deontology, Consequentialism, Utilitarianism, Social Contract'] }
+];
+
+const searchIndex = [];
+SUBJECTS.forEach(s => s.topics.forEach((t,i) => searchIndex.push({subject:s,topicIndex:i,topicName:t})));
+
+function renderSidebar() {
+  document.getElementById('sidebar').innerHTML = SUBJECTS.map(s => `
+    <div class="subject-section" data-subject="${s.id}">
+      <button class="subject-btn" onclick="toggleSubject('${s.id}')">
+        <span class="subject-icon">${s.icon}</span>
+        <span>${s.name}</span>
+        <span class="subject-arrow">▶</span>
+      </button>
+      <div class="topic-list" id="topics-${s.id}">
+        ${s.topics.map((t,i) => `<button class="topic-btn" onclick="loadTopic('${s.id}',${i})" id="tbtn-${s.id}-${i}">${t.split(' — ')[0]}</button>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+function renderWelcomeGrid() {
+  document.getElementById('welcome-grid').innerHTML = SUBJECTS.map(s => `
+    <div class="subject-card" onclick="openSubject('${s.id}')">
+      <div class="icon">${s.icon}</div>
+      <div class="name">${s.name}</div>
+    </div>`).join('');
+}
+
+function toggleSubject(id) {
+  const btn = document.querySelector(`[data-subject="${id}"] .subject-btn`);
+  const list = document.getElementById(`topics-${id}`);
+  const isOpen = list.classList.contains('open');
+  document.querySelectorAll('.topic-list.open').forEach(el => el.classList.remove('open'));
+  document.querySelectorAll('.subject-btn.open,.subject-btn.active').forEach(el => el.classList.remove('open','active'));
+  if (!isOpen) { list.classList.add('open'); btn.classList.add('open','active'); btn.scrollIntoView({behavior:'smooth',block:'nearest'}); }
+}
+
+function openSubject(id) { toggleSubject(id); loadTopic(id,0); closeSidebar(); }
+
+let cache = {};
+
+async function loadTopic(subjectId, topicIndex) {
+  const subject = SUBJECTS.find(s => s.id === subjectId);
+  const topicName = subject.topics[topicIndex];
+  document.getElementById('welcome').style.display = 'none';
+  document.getElementById('content-area').classList.add('active');
+  document.getElementById('content-body').innerHTML = '';
+  document.getElementById('error-state').classList.remove('active');
+  document.querySelectorAll('.topic-btn.active').forEach(b => b.classList.remove('active'));
+  const tbtn = document.getElementById(`tbtn-${subjectId}-${topicIndex}`);
+  if (tbtn) tbtn.classList.add('active');
+  document.getElementById('subject-label').textContent = subject.name;
+  document.getElementById('subject-label').style.background = subject.color;
+  document.getElementById('content-title').textContent = topicName.split(' — ')[0];
+  document.getElementById('content-meta').textContent = topicName.includes('—') ? topicName.split(' — ')[1] : '';
+  document.getElementById('breadcrumb').innerHTML = `${subject.icon} <span>${subject.name}</span> › ${topicName.split(' — ')[0]}`;
+  if (!document.getElementById(`topics-${subjectId}`).classList.contains('open')) toggleSubject(subjectId);
+  closeSidebar();
+  const cacheKey = `${subjectId}-${topicIndex}`;
+  if (cache[cacheKey]) { document.getElementById('content-body').innerHTML = cache[cacheKey]; return; }
+  const msgs = ['Gathering comprehensive information…','Compiling historical sources and theory…','Structuring notes for exam preparation…','Generating in-depth theoretical content…'];
+  document.getElementById('loading-state').classList.add('active');
+  document.getElementById('loading-msg').textContent = msgs[Math.floor(Math.random()*msgs.length)];
+  try {
+    const content = await fetchTopicContent(subject, topicName);
+    document.getElementById('loading-state').classList.remove('active');
+    document.getElementById('content-body').innerHTML = content;
+    cache[cacheKey] = content;
+  } catch(err) {
+    document.getElementById('loading-state').classList.remove('active');
+    document.getElementById('error-state').classList.add('active');
+    document.getElementById('error-msg').innerHTML = `<div style="background:#fff8f0;border:2px solid #c9952a;border-radius:10px;padding:24px;text-align:left;margin-top:12px;"><strong style="color:#8b4513">Failed to connect to AI API.</strong><br><br>${err.message || 'Unknown error'}</div>`;
+  }
+  window.scrollTo({top:0});
+}
+
+async function fetchTopicContent(subject, topicName) {
+  const prompt = `You are an expert UPSC educator. Write a COMPLETE, IN-DEPTH, EXAM-ORIENTED study guide on:\n\nSubject: ${subject.name}\nTopic: ${topicName}\n\nInclude ALL of:\n1. Introduction and Overview\n2. Detailed Theory and Concepts\n3. Key Facts, Dates, Data Points\n4. Classification / Types / Phases\n5. Important Personalities / Acts / Committees\n6. Causes, Features, Consequences\n7. Government Initiatives / Constitutional Provisions\n8. Current Relevance and Contemporary Issues\n9. Critical Analysis\n10. Previous Year Questions (UPSC Prelims and Mains style)\n11. Quick Revision Points\n\nFORMAT: Use HTML tags (h2, h3, h4, p, ul, ol, strong, em, blockquote, table). For PYQs use: <div class="pyq-box"><div class="pyq-title">🎯 Previous Year Questions</div>...</div>. For facts: <div class="info-box"><div class="box-title">Key Facts</div>...</div>. Write at least 1500 words. Start directly with content, no preamble.`;
+  const response = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:4000,messages:[{role:"user",content:prompt}]})
+  });
+  if (!response.ok) { const e = await response.json().catch(()=>({})); throw new Error(e.error?.message || `API error ${response.status}`); }
+  const data = await response.json();
+  return data.content.filter(b=>b.type==='text').map(b=>b.text).join('\n');
+}
+
+const searchInput = document.getElementById('search-input');
+const searchResultsEl = document.getElementById('search-results');
+searchInput.addEventListener('input', () => {
+  const q = searchInput.value.trim().toLowerCase();
+  if (!q||q.length<2) { searchResultsEl.classList.remove('active'); return; }
+  const results = searchIndex.filter(item => item.topicName.toLowerCase().includes(q)||item.subject.name.toLowerCase().includes(q)).slice(0,10);
+  if (!results.length) { searchResultsEl.classList.remove('active'); return; }
+  searchResultsEl.innerHTML = results.map(r=>`<div class="search-result-item" onclick="selectSearchResult('${r.subject.id}',${r.topicIndex})"><div class="subject-tag">${r.subject.icon} ${r.subject.name}</div><div>${r.topicName.split(' — ')[0]}</div></div>`).join('');
+  searchResultsEl.classList.add('active');
+});
+function selectSearchResult(sid,ti) { searchResultsEl.classList.remove('active'); searchInput.value=''; if(!document.getElementById(`topics-${sid}`).classList.contains('open'))toggleSubject(sid); loadTopic(sid,ti); }
+document.addEventListener('click',e=>{ if(!e.target.closest('.search-bar'))searchResultsEl.classList.remove('active'); });
+
+const hamburger = document.getElementById('hamburger');
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('sidebar-overlay');
+hamburger.addEventListener('click',()=>{ sidebar.classList.toggle('open'); overlay.classList.toggle('active'); });
+function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('active'); }
+overlay.addEventListener('click',closeSidebar);
+
+const progressBar = document.getElementById('progress-bar');
+const backTop = document.getElementById('back-top');
+window.addEventListener('scroll',()=>{
+  const pct = document.body.scrollHeight-window.innerHeight>0?(window.scrollY/(document.body.scrollHeight-window.innerHeight))*100:0;
+  progressBar.style.width=pct+'%';
+  backTop.classList.toggle('visible',window.scrollY>300);
+});
+
+renderSidebar();
+renderWelcomeGrid();
+</script>
+</body>
+</html>
