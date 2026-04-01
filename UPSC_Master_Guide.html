@@ -1,0 +1,2777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UPSC Comprehensive Study Guide 2024-25</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --surface2: #1c2333;
+  --border: #30363d;
+  --gold: #d4a853;
+  --gold2: #f0c060;
+  --amber: #e6a817;
+  --red: #c0392b;
+  --green: #2ecc71;
+  --blue: #3498db;
+  --text: #e6edf3;
+  --text-dim: #8b949e;
+  --text-muted: #6e7681;
+  --accent: #f78166;
+  --sidebar-w: 280px;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ===== SIDEBAR ===== */
+#sidebar {
+  width: var(--sidebar-w);
+  min-width: var(--sidebar-w);
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  height: 100vh;
+  position: fixed;
+  left: 0; top: 0;
+  overflow-y: auto;
+  z-index: 100;
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+#sidebar::-webkit-scrollbar { width: 4px; }
+#sidebar::-webkit-scrollbar-track { background: var(--surface); }
+#sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+.sidebar-header {
+  padding: 20px 16px 16px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(135deg, #1a1f2e 0%, #161b22 100%);
+  position: sticky; top: 0; z-index: 10;
+}
+
+.sidebar-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--gold);
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+
+.sidebar-sub {
+  font-size: 10px;
+  color: var(--text-muted);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.search-box {
+  margin: 12px 16px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 8px 12px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.search-box input:focus { border-color: var(--gold); }
+.search-box input::placeholder { color: var(--text-muted); }
+
+.nav-subject {
+  padding: 0 8px 8px;
+}
+
+.subject-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 2px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  color: var(--text-dim);
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s;
+}
+
+.subject-btn:hover { background: var(--surface2); color: var(--gold); }
+.subject-btn.active { background: rgba(212,168,83,0.15); color: var(--gold); }
+
+.subject-btn .icon {
+  font-size: 16px;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.subject-btn .chevron {
+  font-size: 10px;
+  transition: transform 0.2s;
+  color: var(--text-muted);
+}
+
+.subject-btn.open .chevron { transform: rotate(180deg); }
+
+.topic-list {
+  display: none;
+  padding-left: 8px;
+  border-left: 2px solid var(--border);
+  margin: 0 8px 8px 20px;
+}
+
+.topic-list.open { display: block; }
+
+.topic-btn {
+  display: block;
+  width: 100%;
+  padding: 7px 12px;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  color: var(--text-dim);
+  font-size: 12.5px;
+  font-family: 'Source Serif 4', serif;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s;
+  line-height: 1.4;
+  margin-bottom: 1px;
+}
+
+.topic-btn:hover { background: var(--surface2); color: var(--text); }
+.topic-btn.active { background: rgba(212,168,83,0.1); color: var(--gold2); border-left: 2px solid var(--gold); padding-left: 10px; }
+
+/* ===== MAIN CONTENT ===== */
+#main {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#topbar {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(13,17,23,0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 32px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.breadcrumb {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.breadcrumb span { color: var(--text-dim); }
+.breadcrumb .sep { color: var(--border); }
+.breadcrumb .current { color: var(--gold); }
+
+#hamburger {
+  display: none;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* ===== CONTENT AREA ===== */
+#content-area {
+  flex: 1;
+  padding: 40px 48px;
+  max-width: 900px;
+}
+
+/* HOME SCREEN */
+.home-screen {
+  padding: 20px 0;
+}
+
+.home-hero {
+  margin-bottom: 48px;
+  text-align: center;
+  padding: 60px 40px;
+  background: linear-gradient(135deg, rgba(212,168,83,0.08) 0%, rgba(52,152,219,0.05) 100%);
+  border: 1px solid rgba(212,168,83,0.2);
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.home-hero::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(ellipse at center, rgba(212,168,83,0.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.home-hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 48px;
+  font-weight: 900;
+  color: var(--gold);
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+
+.home-hero p {
+  font-size: 17px;
+  color: var(--text-dim);
+  max-width: 600px;
+  margin: 0 auto 24px;
+  line-height: 1.7;
+}
+
+.home-stats {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--gold2);
+}
+
+.stat-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.subjects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.subject-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+
+.subject-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--card-color, var(--gold));
+  border-radius: 12px 12px 0 0;
+}
+
+.subject-card:hover {
+  border-color: var(--card-color, var(--gold));
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+
+.card-icon { font-size: 28px; margin-bottom: 10px; }
+.card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.card-desc {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.card-count {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--card-color, var(--gold));
+}
+
+/* ===== TOPIC CONTENT ===== */
+.topic-content {
+  display: none;
+}
+
+.topic-content.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.topic-header {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.topic-tag {
+  display: inline-block;
+  padding: 4px 12px;
+  background: rgba(212,168,83,0.1);
+  border: 1px solid rgba(212,168,83,0.3);
+  border-radius: 20px;
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--gold);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.topic-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--text);
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+.topic-meta {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: 'JetBrains Mono', monospace;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.meta-item { display: flex; align-items: center; gap: 6px; }
+
+/* Content typography */
+.content-body h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--gold);
+  margin: 36px 0 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(212,168,83,0.2);
+}
+
+.content-body h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--gold2);
+  margin: 24px 0 10px;
+}
+
+.content-body h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--accent);
+  margin: 18px 0 8px;
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 12px;
+}
+
+.content-body p {
+  font-size: 15.5px;
+  line-height: 1.85;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+
+.content-body ul, .content-body ol {
+  margin: 12px 0 14px 20px;
+}
+
+.content-body li {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--text);
+  margin-bottom: 6px;
+  padding-left: 6px;
+}
+
+.content-body li::marker { color: var(--gold); }
+
+.content-body strong { color: var(--gold2); font-weight: 600; }
+.content-body em { color: var(--accent); font-style: italic; }
+
+.highlight-box {
+  background: rgba(212,168,83,0.07);
+  border: 1px solid rgba(212,168,83,0.25);
+  border-left: 4px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  padding: 16px 20px;
+  margin: 20px 0;
+}
+
+.highlight-box.blue {
+  background: rgba(52,152,219,0.07);
+  border-color: rgba(52,152,219,0.25);
+  border-left-color: var(--blue);
+}
+
+.highlight-box.red {
+  background: rgba(192,57,43,0.07);
+  border-color: rgba(192,57,43,0.25);
+  border-left-color: var(--red);
+}
+
+.highlight-box.green {
+  background: rgba(46,204,113,0.07);
+  border-color: rgba(46,204,113,0.25);
+  border-left-color: var(--green);
+}
+
+.highlight-box h4 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.highlight-box.blue h4 { color: var(--blue); }
+.highlight-box.red h4 { color: var(--accent); }
+.highlight-box.green h4 { color: var(--green); }
+
+.info-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 14px;
+}
+
+.info-table th {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  padding: 10px 14px;
+  text-align: left;
+  color: var(--gold);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-table td {
+  border: 1px solid var(--border);
+  padding: 9px 14px;
+  vertical-align: top;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.info-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+.timeline {
+  position: relative;
+  padding-left: 28px;
+  margin: 20px 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 6px; top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -26px; top: 6px;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 2px solid var(--bg);
+}
+
+.timeline-year {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+
+.timeline-text {
+  font-size: 14.5px;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.keypoint-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.keypoint {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.keypoint-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.keypoint-val {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.nav-arrows {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.nav-arrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-dim);
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s;
+  max-width: 45%;
+}
+
+.nav-arrow:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: rgba(212,168,83,0.05);
+}
+
+.nav-arrow .arrow-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.progress-bar {
+  height: 2px;
+  background: var(--border);
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(to right, var(--gold), var(--amber));
+  width: 0%;
+  transition: width 0.1s;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  #sidebar {
+    transform: translateX(-100%);
+  }
+  #sidebar.open {
+    transform: translateX(0);
+  }
+  #main {
+    margin-left: 0;
+  }
+  #hamburger { display: block; }
+  #content-area { padding: 24px 20px; }
+  .topic-title { font-size: 26px; }
+  .home-hero h1 { font-size: 32px; }
+  #topbar { padding: 10px 16px; }
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 90;
+}
+
+.overlay.show { display: block; }
+
+/* Section dividers in content */
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 32px 0;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.section-divider::before, .section-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* Code/formula boxes */
+.formula {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--gold2);
+  margin: 12px 0;
+  overflow-x: auto;
+}
+
+/* UPSC tip box */
+.upsc-tip {
+  background: rgba(52,152,219,0.08);
+  border: 1px solid rgba(52,152,219,0.3);
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin: 20px 0;
+  font-size: 13.5px;
+}
+
+.upsc-tip::before {
+  content: '💡 UPSC TIP: ';
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--blue);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Tags for important terms */
+.term {
+  background: rgba(212,168,83,0.12);
+  border: 1px solid rgba(212,168,83,0.3);
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-size: 0.9em;
+  color: var(--gold2);
+}
+
+/* Sticky TOC */
+.toc-sidebar {
+  display: none;
+}
+
+@media (min-width: 1200px) {
+  #content-area {
+    max-width: unset;
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .home-screen, .home-screen ~ * {
+    grid-column: 1 / -1;
+  }
+
+  .topic-main-col { }
+
+  .toc-sidebar {
+    display: block;
+    position: sticky;
+    top: 80px;
+    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .toc-sidebar h5 {
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .toc-item {
+    display: block;
+    padding: 4px 0;
+    color: var(--text-muted);
+    text-decoration: none;
+    cursor: pointer;
+    border-left: 2px solid transparent;
+    padding-left: 8px;
+    transition: all 0.2s;
+    line-height: 1.4;
+    margin-bottom: 2px;
+  }
+
+  .toc-item:hover { color: var(--gold); border-left-color: var(--gold); }
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+<!-- SIDEBAR -->
+<nav id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">UPSC Master Guide</div>
+    <div class="sidebar-sub">Civil Services 2024–25</div>
+  </div>
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search topics..." oninput="filterTopics(this.value)">
+  </div>
+  <div class="nav-subject" id="navMenu">
+    <!-- Generated by JS -->
+  </div>
+</nav>
+
+<!-- MAIN -->
+<div id="main">
+  <div id="topbar">
+    <button id="hamburger" onclick="toggleSidebar()">☰</button>
+    <div class="breadcrumb" id="breadcrumb">
+      <span>UPSC Guide</span>
+      <span class="sep">›</span>
+      <span class="current">Home</span>
+    </div>
+  </div>
+
+  <div id="content-area">
+    <!-- HOME -->
+    <div id="home" class="home-screen">
+      <div class="home-hero">
+        <h1>UPSC Master Guide</h1>
+        <p>A comprehensive, one-stop study resource covering all subjects of the UPSC Civil Services Examination — curated from Rao's Academy, PW OnlyIAS, and expert knowledge.</p>
+        <div class="home-stats">
+          <div class="stat"><div class="stat-num">12</div><div class="stat-label">Subjects</div></div>
+          <div class="stat"><div class="stat-num">150+</div><div class="stat-label">Topics</div></div>
+          <div class="stat"><div class="stat-num">500+</div><div class="stat-label">Key Concepts</div></div>
+          <div class="stat"><div class="stat-num">GS I–IV</div><div class="stat-label">Papers Covered</div></div>
+        </div>
+      </div>
+      <div class="subjects-grid" id="subjectCards"></div>
+    </div>
+
+    <!-- TOPIC CONTENTS WILL BE INJECTED HERE -->
+    <div id="topicContainer"></div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// DATA STRUCTURE
+// ============================================================
+const subjects = [
+  {
+    id: 'ancient-history',
+    title: 'Ancient History',
+    icon: '🏛️',
+    color: '#c0392b',
+    desc: 'From Indus Valley Civilization through the empires of South India',
+    topics: [
+      { id: 'ivc', title: 'Indus Valley Civilization' },
+      { id: 'vedic', title: 'Vedic Culture' },
+      { id: 'buddhism', title: 'Buddhism' },
+      { id: 'jainism', title: 'Jainism' },
+      { id: 'maurya', title: 'Maurya Empire' },
+      { id: 'indo-greek', title: 'The Indo-Greek Rulers' },
+      { id: 'satavahana', title: 'Satavahana Empire' },
+      { id: 'gupta', title: 'Gupta Empire' },
+      { id: 'harsha', title: 'Reign of Harsha' },
+      { id: 'post-gupta', title: 'Post-Gupta Society' },
+      { id: 'middle-kingdoms', title: 'The Middle Kingdoms' },
+      { id: 'south-empires', title: 'Empires of South India' },
+      { id: 'legacy-ancient', title: 'Legacy of Ancient India' },
+    ]
+  },
+  {
+    id: 'medieval-history',
+    title: 'Medieval History',
+    icon: '⚔️',
+    color: '#8e44ad',
+    desc: 'Arab invasions, Delhi Sultanate, Mughals, Marathas and British arrival',
+    topics: [
+      { id: 'arab-invasions', title: 'Arab Invasions & NW India' },
+      { id: 'delhi-sultanate', title: 'Delhi Sultanate' },
+      { id: 'khilji', title: 'The Khilji Dynasty' },
+      { id: 'tughlaq', title: 'Tughlaq Dynasty' },
+      { id: 'mughal', title: 'The Mughal Empire' },
+      { id: 'europeans', title: 'The Coming of Europeans' },
+      { id: 'british-rule', title: 'Establishment of British Rule' },
+      { id: 'maratha', title: 'Maratha Empire' },
+    ]
+  },
+  {
+    id: 'modern-history',
+    title: 'Modern History',
+    icon: '🇮🇳',
+    color: '#27ae60',
+    desc: 'Freedom struggle, socio-religious reforms, and colonial policies',
+    topics: [
+      { id: 'revolt-1857', title: 'Revolt of 1857' },
+      { id: 'socio-religious-reforms', title: 'Socio-Religious Reform Movements' },
+      { id: 'nationalist-movement', title: 'Rise of Nationalist Movement' },
+      { id: 'gandhi-era', title: 'Gandhian Era' },
+      { id: 'revolutionary-movements', title: 'Revolutionary Movements' },
+      { id: 'partition-independence', title: 'Partition & Independence' },
+      { id: 'colonial-economy', title: 'Colonial Economic Policies' },
+    ]
+  },
+  {
+    id: 'indian-polity',
+    title: 'Indian Polity',
+    icon: '⚖️',
+    color: '#d4a853',
+    desc: 'Constitution, Fundamental Rights, Parliament, Judiciary and Federalism',
+    topics: [
+      { id: 'constitution-historical', title: 'Constitutional Historical Underpinnings' },
+      { id: 'constitution-salient', title: 'Salient Features of Constitution' },
+      { id: 'preamble', title: 'Preamble' },
+      { id: 'union-territory', title: 'Union and Its Territory' },
+      { id: 'citizenship', title: 'Citizenship' },
+      { id: 'fundamental-rights', title: 'Fundamental Rights' },
+      { id: 'dpsp', title: 'Directive Principles of State Policy' },
+      { id: 'fundamental-duties', title: 'Fundamental Duties' },
+      { id: 'parliament', title: 'Parliament' },
+      { id: 'president', title: 'President & Vice President' },
+      { id: 'pm-cabinet', title: 'Prime Minister & Council of Ministers' },
+      { id: 'judiciary', title: 'Judiciary' },
+      { id: 'federalism', title: 'Centre-State Relations & Federalism' },
+      { id: 'local-governance', title: 'Local Self-Government' },
+      { id: 'elections', title: 'Elections & Electoral Reforms' },
+      { id: 'constitutional-bodies', title: 'Constitutional Bodies' },
+    ]
+  },
+  {
+    id: 'basic-economics',
+    title: 'Basic Economics',
+    icon: '📈',
+    color: '#16a085',
+    desc: 'Foundations of economics, banking, inflation, planning and trade',
+    topics: [
+      { id: 'intro-economics', title: 'Introduction to Economics' },
+      { id: 'banking-india', title: 'Banking in India' },
+      { id: 'inflation', title: 'Inflation' },
+      { id: 'financial-system', title: 'Financial System' },
+      { id: 'public-finance', title: 'Public Finance' },
+      { id: 'economic-planning', title: 'Economic Planning' },
+      { id: 'agriculture-basic', title: 'Agriculture' },
+      { id: 'infrastructure-basic', title: 'Infrastructure' },
+      { id: 'industry-labour', title: 'Industry, Labour & Employment' },
+      { id: 'international-econ', title: 'International Economics' },
+      { id: 'govt-schemes-econ', title: 'Government Schemes (Economy)' },
+      { id: 'prelims-econ', title: 'Important Topics for Prelims' },
+    ]
+  },
+  {
+    id: 'economics',
+    title: 'Advanced Economics',
+    icon: '💹',
+    color: '#2980b9',
+    desc: 'Inclusive growth, agriculture policy, industrial policy, monetary policy',
+    topics: [
+      { id: 'inclusive-growth', title: 'Inclusive Growth & Development' },
+      { id: 'budgeting', title: 'Budgeting in India' },
+      { id: 'agri-animal', title: 'Agriculture & Animal Husbandry' },
+      { id: 'cropping-pattern', title: 'Cropping Pattern & Land Use' },
+      { id: 'farm-variability', title: 'Farm Variability & Market Access' },
+      { id: 'irrigation', title: 'Irrigation & Water Security' },
+      { id: 'subsidies', title: 'Role of Subsidies in Agriculture' },
+      { id: 'msp', title: 'Minimum Support Price (MSP)' },
+      { id: 'pds', title: 'PDS & Food Security' },
+      { id: 'food-processing', title: 'Food Processing Industries' },
+      { id: 'land-reforms', title: 'Land Reforms in Agriculture' },
+      { id: 'industrial-policy', title: 'Industrial Policy' },
+      { id: 'new-econ-policy', title: 'New Economic Policy (LPG)' },
+      { id: 'ppp', title: 'Public Private Partnership' },
+      { id: 'monetary-policy', title: 'Monetary Policy' },
+      { id: 'employment', title: 'Employment Generation & Planning' },
+      { id: 'education-policy', title: 'Education – Policies & Outcomes' },
+      { id: 'health-policy', title: 'Health – Policies & Outcomes' },
+    ]
+  },
+  {
+    id: 'indian-geography',
+    title: 'Indian Geography',
+    icon: '🗺️',
+    color: '#e67e22',
+    desc: 'Physical features, climate, rivers, soils, minerals and transport',
+    topics: [
+      { id: 'physical-features', title: 'Physical Features of India' },
+      { id: 'climate', title: 'Climate Profile of India' },
+      { id: 'river-system', title: 'River System in India' },
+      { id: 'soil-vegetation', title: 'Soils & Natural Vegetation' },
+      { id: 'indian-agriculture-geo', title: 'Indian Agriculture' },
+      { id: 'minerals', title: 'Minerals in India' },
+      { id: 'industry-geo', title: 'Industry in India' },
+      { id: 'transport', title: 'Transport System in India' },
+    ]
+  },
+  {
+    id: 'world-geography',
+    title: 'World Geography',
+    icon: '🌍',
+    color: '#1abc9c',
+    desc: 'Geomorphology, climatology, oceanography, world resources and regions',
+    topics: [
+      { id: 'geomorphology', title: 'Geomorphology' },
+      { id: 'climatology', title: 'Climatology' },
+      { id: 'oceanography', title: 'Oceanography' },
+      { id: 'world-agriculture-geo', title: 'World Agriculture' },
+      { id: 'world-resources', title: 'World Resources & Industries' },
+      { id: 'world-regions', title: 'Important World Regions' },
+    ]
+  },
+  {
+    id: 'environment',
+    title: 'Environment & Ecology',
+    icon: '🌿',
+    color: '#27ae60',
+    desc: 'Ecology fundamentals, biodiversity, climate change, environmental laws',
+    topics: [
+      { id: 'ecology-basics', title: 'Ecology Basics' },
+      { id: 'biodiversity', title: 'Biodiversity' },
+      { id: 'climate-change', title: 'Climate Change' },
+      { id: 'env-pollution', title: 'Environmental Pollution' },
+      { id: 'env-laws', title: 'Environmental Laws & Conventions' },
+      { id: 'wildlife-protection', title: 'Wildlife Protection' },
+      { id: 'forest-policy', title: 'Forest Policy in India' },
+    ]
+  },
+  {
+    id: 'science-tech',
+    title: 'Science & Technology',
+    icon: '🔬',
+    color: '#9b59b6',
+    desc: 'Space tech, biotech, IT, defence, nuclear, and recent developments',
+    topics: [
+      { id: 'space-tech', title: 'Space Technology (ISRO)' },
+      { id: 'biotech', title: 'Biotechnology' },
+      { id: 'it-cyber', title: 'IT & Cyber Security' },
+      { id: 'defence-tech', title: 'Defence Technology' },
+      { id: 'nuclear', title: 'Nuclear Technology' },
+      { id: 'health-tech', title: 'Health & Medical Tech' },
+      { id: 'nanotechnology', title: 'Nanotechnology & New Materials' },
+    ]
+  },
+  {
+    id: 'governance',
+    title: 'Governance',
+    icon: '🏛️',
+    color: '#e74c3c',
+    desc: 'E-governance, RTI, citizen charters, social sector, accountability',
+    topics: [
+      { id: 'governance-basics', title: 'Governance: Basics & Background' },
+      { id: 'rti', title: 'RTI Act 2005' },
+      { id: 'citizen-charter', title: 'Citizen Charters' },
+      { id: 'e-governance', title: 'E-Governance' },
+      { id: 'role-civil-services', title: 'Role of Civil Services' },
+      { id: 'social-sector', title: 'Social Sector Initiatives' },
+      { id: 'decentralisation', title: 'Decentralisation' },
+    ]
+  },
+  {
+    id: 'international-relations',
+    title: 'International Relations',
+    icon: '🌐',
+    color: '#3498db',
+    desc: "India's foreign policy, bilateral relations, global organizations",
+    topics: [
+      { id: 'indian-foreign-policy', title: "India's Foreign Policy" },
+      { id: 'india-neighbours', title: 'India & Neighbours' },
+      { id: 'india-major-powers', title: 'India & Major World Powers' },
+      { id: 'un-system', title: 'United Nations System' },
+      { id: 'regional-orgs', title: 'Regional Organizations' },
+      { id: 'global-issues', title: 'Global Issues & India' },
+    ]
+  },
+];
+
+// ============================================================
+// CONTENT DATABASE
+// ============================================================
+const content = {
+
+// ==========================
+// ANCIENT HISTORY
+// ==========================
+'ivc': {
+  tag: 'Ancient History',
+  title: 'Indus Valley Civilization',
+  read: '20 min read',
+  importance: 'High – Prelims & Mains GS-I',
+  body: `
+<h2>Introduction</h2>
+<p>The Indus Valley Civilization (IVC), also known as the <strong>Harappan Civilization</strong>, is one of the world's three earliest urban civilizations alongside Mesopotamia and Ancient Egypt. Remarkably, it was the <strong>largest in geographic extent</strong> of all three. Its remains were first discovered at <strong>Harappa</strong> in 1921, hence the alternate name.</p>
+
+<div class="highlight-box">
+<h4>Key Fast Facts</h4>
+<p><strong>Period:</strong> c. 2900–1900 BCE (Mature Phase c. 2600–1900 BCE) | <strong>Area:</strong> ~13 lakh sq km | <strong>Largest site (area-wise):</strong> Rakhigarhi (Haryana) | <strong>Script:</strong> Undeciphered | <strong>Type:</strong> Bronze Age Urban Civilization</p>
+</div>
+
+<h2>Geographic Extent</h2>
+<p>The civilization's heartland was in <strong>Sindh and Punjab</strong> (undivided India). It spread across a triangular region:</p>
+<ul>
+<li><strong>Western boundary:</strong> Sutkagendor (coastal Baluchistan)</li>
+<li><strong>Eastern boundary:</strong> Alamgirpur (Uttar Pradesh, District Meerut)</li>
+<li><strong>Northern boundary:</strong> Manda (Jammu & Kashmir)</li>
+<li><strong>Southern boundary:</strong> Bhagvatrav (Narmada Estuary, Gujarat)</li>
+<li>Later finds: Diamabad (Maharashtra), extending to Mumbai coast</li>
+</ul>
+
+<div class="highlight-box blue">
+<h4>Comparison with Other Civilizations</h4>
+<p>No other ancient civilization covered as large an area as the IVC (~13 lakh sq km). Egypt and Mesopotamia were significantly smaller in geographic spread. This makes the IVC unique as a remarkably spread-out Bronze Age urban culture.</p>
+</div>
+
+<h2>Origin of the Civilization</h2>
+<p>There are two principal theories:</p>
+<ol>
+<li><strong>Origin from Mehrgarh (widely accepted):</strong> Mehrgarh in Baluchistan dates to 7000 BCE — a Neolithic site showing the transition from hunter-gatherer to settled farming (wheat, barley) and animal husbandry. By 5000 BCE, Mehrgarh had trade links to Arabia and Central Asia, suggesting it was the seedbed of Harappan culture.</li>
+<li><strong>Dravidian/South Indian origin:</strong> Some scholars link IVC to Neolithic settlements in Karnataka, arguing it was a Dravidian civilization. The undeciphered IVC script has been tentatively linked to Proto-Dravidian languages by some researchers.</li>
+</ol>
+
+<h2>Salient Common Features</h2>
+<ul>
+<li><strong>Script on seals:</strong> The Indus script appears on thousands of seals. It is <em>pictographic</em> and boustrophedon in direction; remains undeciphered to date.</li>
+<li><strong>Town planning:</strong> Consistent grid layout — straight roads intersecting at right angles, baked and sun-dried bricks, covered drainage systems. The drainage network was arguably more advanced than any contemporary civilization.</li>
+<li><strong>Fortified citadels:</strong> Most urban centres featured a raised citadel (western part) and a lower town (eastern part).</li>
+<li><strong>Standard weights & measures:</strong> Uniform across the entire civilization, using a binary and decimal system. Weights were typically made of chert, limestone, or steatite.</li>
+<li><strong>Pottery:</strong> Wheel-made red and black pottery, often decorated with geometric patterns and animal motifs.</li>
+<li><strong>Burial practices:</strong> Primary burial (complete body burial) was common. At some sites, coffin burial and fractional burial also found.</li>
+</ul>
+
+<h2>Key Sites: Harappa & Mohenjo-Daro</h2>
+
+<div class="keypoint-grid">
+<div class="keypoint"><div class="keypoint-title">Harappa</div><div class="keypoint-val">On river Ravi; rows of granaries; citadel; furnaces; crucible for bronze; 6 granaries in 2 rows</div></div>
+<div class="keypoint"><div class="keypoint-title">Mohenjo-Daro</div><div class="keypoint-val">On river Indus; Great Bath; uniform buildings; maximum unicorn seals; dancing girl figurine; evidence of violence</div></div>
+<div class="keypoint"><div class="keypoint-title">Dholavira</div><div class="keypoint-val">Gujarat; largest stadium-like structure; unique water conservation systems; a 10-character inscription</div></div>
+<div class="keypoint"><div class="keypoint-title">Rakhigarhi</div><div class="keypoint-val">Haryana; currently the largest IVC site by area; DNA studies ongoing</div></div>
+<div class="keypoint"><div class="keypoint-title">Lothal</div><div class="keypoint-val">Gujarat; only dockyard of the IVC; evidence of rice cultivation; fire altars</div></div>
+<div class="keypoint"><div class="keypoint-title">Kalibangan</div><div class="keypoint-val">Rajasthan; evidence of ploughed field; fire altars; camel bones</div></div>
+</div>
+
+<h3>The Great Bath of Mohenjo-Daro</h3>
+<p>The most iconic structure of the IVC is the <strong>Great Bath</strong>. Key features:</p>
+<ul>
+<li>Dimensions: <strong>6m × 12m</strong>, depth ~2.4m</li>
+<li>Materials: Burnt bricks, mortar, and gypsum — <strong>no stone used</strong></li>
+<li>Floor and walls were bituminized to prevent water leakage</li>
+<li>Open porches on all four sides; changing rooms nearby</li>
+<li>Water supplied from a well in an adjacent room</li>
+<li>Purpose: Likely ritual purification (religious bathing)</li>
+</ul>
+
+<h2>Social & Cultural Life</h2>
+
+<h3>Administration</h3>
+<p>The nature of governance remains debated. There is <strong>no evidence of kings, palaces, or temples</strong> in the conventional sense, suggesting a possibly <em>theocratic</em> or <em>priestly/merchant oligarchic</em> administration. The uniformity across the civilization points to strong centralized planning.</p>
+
+<h3>Religion</h3>
+<p>IVC people practiced a nature-based religion:</p>
+<ul>
+<li><strong>Mother Goddess worship:</strong> Numerous terracotta figurines of a female deity found</li>
+<li><strong>Pashupati/Proto-Shiva:</strong> A seal from Mohenjo-Daro shows a three-faced figure surrounded by animals — possibly an early form of Shiva as Pashupati (lord of animals)</li>
+<li><strong>Linga and Yoni worship:</strong> Stone objects suggesting phallic and female organ worship</li>
+<li><strong>Tree worship:</strong> Especially the Pipal tree (sacred fig)</li>
+<li><strong>Animal worship:</strong> The humped bull (zebu) was possibly sacred; unicorn seals are most common</li>
+</ul>
+
+<h3>Economy</h3>
+<ul>
+<li><strong>Agriculture:</strong> Wheat, barley, peas, sesame, mustard; rice at Lothal and Rangpur; cotton — the <strong>world's first cotton textile</strong> producers</li>
+<li><strong>Animal husbandry:</strong> Cattle, sheep, goat, pig, buffalo, camel, horse (debated)</li>
+<li><strong>Trade:</strong> Extensive internal trade (uniform weights) and external trade with Mesopotamia (Sumerians called them "Meluhha"), Persian Gulf, Central Asia</li>
+<li><strong>Industries:</strong> Bead-making (Chanhudaro specialized), shell-work, pottery, metallurgy</li>
+<li><strong>Metals:</strong> Bronze (copper + tin), copper, gold, silver — but <strong>no iron</strong></li>
+</ul>
+
+<h3>Metallurgy & Technology</h3>
+<p>The IVC was a <strong>Bronze Age civilization</strong>. They used copper and bronze extensively. Notable finds include the famous <em>Dancing Girl</em> — a bronze figurine from Mohenjo-Daro, and a bronze figurine of a dog at Harappa. They had no knowledge of iron.</p>
+
+<h3>Seals</h3>
+<p>Over 2,000 seals found — mostly square or rectangular, made of steatite. The unicorn seal is most common. Seals were likely used for trade and identification. The Pashupati seal is the most famous.</p>
+
+<h2>Decline of the Civilization</h2>
+<p>The civilization declined around <strong>1900 BCE</strong>. Multiple theories:</p>
+
+<div class="timeline">
+<div class="timeline-item">
+<div class="timeline-year">Environmental Theory</div>
+<div class="timeline-text">River course changes (Saraswati drying up), floods, earthquakes, and ecological degradation through deforestation and overgrazing made agriculture unsustainable.</div>
+</div>
+<div class="timeline-item">
+<div class="timeline-year">Aryan Invasion Theory</div>
+<div class="timeline-text">Once widely accepted (Wheeler's massacre theory based on skeletons at Mohenjo-Daro), but now largely discredited. Current scholarship favors gradual migration/acculturation over invasion.</div>
+</div>
+<div class="timeline-item">
+<div class="timeline-year">Epidemic/Disease Theory</div>
+<div class="timeline-text">Evidence of malaria and other diseases from skeletal remains. Overcrowded urban conditions may have enabled epidemics.</div>
+</div>
+<div class="timeline-item">
+<div class="timeline-year">Trade Collapse</div>
+<div class="timeline-text">Decline of Mesopotamian trade around 1900 BCE coincides with IVC decline, suggesting economic interdependence.</div>
+</div>
+</div>
+
+<div class="upsc-tip">The IVC is frequently tested in UPSC Prelims. Focus on: sites and their rivers, unique findings per site (Lothal=dockyard, Kalibangan=ploughed field), characteristics of Great Bath, trade items, metals known/unknown, and decline theories.</div>
+`
+},
+
+'vedic': {
+  tag: 'Ancient History',
+  title: 'Vedic Culture',
+  read: '30 min read',
+  importance: 'High – Prelims & Mains GS-I',
+  body: `
+<h2>Introduction</h2>
+<p>Vedic culture refers to the civilization established by the <strong>Aryans</strong> in the Indian subcontinent, broadly from <strong>1500–600 BCE</strong>. It is divided into two phases: the <strong>Early/Rig-Vedic period</strong> (c. 1500–1000 BCE) and the <strong>Later Vedic period</strong> (c. 1000–600 BCE). The primary sources are the <em>Vedas</em> and their ancillary literature.</p>
+
+<h2>Who Were the Aryans?</h2>
+<p>The term "Aryan" is <strong>linguistic, not racial</strong> — it refers to speakers of Indo-Aryan languages. They migrated from the Eurasian Steppe (Central Asia/Iran region) into the Indian subcontinent. Evidence includes the <strong>Boghazkoi inscriptions</strong> (Turkey, c. 1400 BCE) mentioning Vedic gods Mitra, Varuna, Indra, and Nasatyas, confirming the Aryans' presence in West Asia before entering India. The region they initially settled in was <em>Sapta Sindhu</em> — the land of seven rivers.</p>
+
+<h2>Vedic Literature</h2>
+
+<h3>Shruti Literature (Heard – Divine Revelation)</h3>
+
+<h4>The Four Vedas</h4>
+<table class="info-table">
+<tr><th>Veda</th><th>Content</th><th>Key Feature</th></tr>
+<tr><td><strong>Rig-Veda</strong></td><td>1028 hymns (suktas) in 10 mandalas; hymns to nature deities</td><td>Oldest Veda; oldest literary text in Indo-European languages; Mandala 2–7 are oldest (family books); Purusha Sukta in Mandala 10 describes origin of varnas</td></tr>
+<tr><td><strong>Sama-Veda</strong></td><td>Musical rendering of Rig-Vedic hymns; 1810 verses</td><td>Called "Gandharva Veda" (science of music); root of Indian classical music</td></tr>
+<tr><td><strong>Yajur-Veda</strong></td><td>Prose and verse sacrificial formulae</td><td>Two versions: Shukla (White) and Krishna (Black) Yajurveda; deals with rituals and sacrifices</td></tr>
+<tr><td><strong>Atharva-Veda</strong></td><td>Spells, charms, incantations, hymns</td><td>Closest to folk religion; reflects everyday beliefs; includes medical knowledge; late addition to the Vedic corpus</td></tr>
+</table>
+
+<h4>Brahmanas, Aranyakas & Upanishads</h4>
+<ul>
+<li><strong>Brahmanas:</strong> Prose texts explaining the ritualistic aspects of the Vedas. Each Veda has its associated Brahmana (e.g., Aitareya and Kaushitaki for Rig-Veda).</li>
+<li><strong>Aranyakas:</strong> "Forest texts" — philosophical works composed in forest retreats. Bridge between ritualistic Brahmanas and philosophical Upanishads.</li>
+<li><strong>Upanishads:</strong> The culmination of Vedic thought — metaphysical and philosophical works. 108 Upanishads exist; the most important are the <em>Brihadaranyaka</em>, <em>Chandogya</em>, <em>Taittiriya</em>, <em>Aitareya</em>, <em>Kena</em>, <em>Katha</em>, <em>Isha</em>, <em>Mundaka</em>, <em>Mandukya</em>, and <em>Prashna</em>. Core concepts: <em>Brahman</em> (ultimate reality), <em>Atman</em> (individual soul), their unity (Aham Brahmasmi), <em>Karma</em>, <em>Moksha</em>.</li>
+</ul>
+
+<h3>Smriti Literature (Remembered – Human Composition)</h3>
+<ul>
+<li><strong>Vedangas (6 auxiliary sciences):</strong> Shiksha (phonetics), Kalpa (ritual canon), Vyakarana (grammar — Panini's Ashtadhyayi), Nirukta (etymology — Yaska), Chhanda (meter — Pingala), Jyotisha (astronomy)</li>
+<li><strong>Upavedas:</strong> Ayurveda (medicine), Dhanurveda (archery), Gandharvaveda (music), Arthashastra (statecraft)</li>
+<li><strong>Epics:</strong> Ramayana (24,000 shlokas, Valmiki) and Mahabharata (1,00,000 shlokas, Vyasa — longest epic in the world; Bhagavad Gita is part of Bhishmaparva)</li>
+<li><strong>Puranas:</strong> 18 major Puranas; Bhagavata Purana most popular; deal with cosmology, genealogies, myths</li>
+</ul>
+
+<h3>Six Schools of Philosophy (Shatdarshana)</h3>
+<div class="keypoint-grid">
+<div class="keypoint"><div class="keypoint-title">Nyaya</div><div class="keypoint-val">Logic and epistemology; Gautama; right knowledge through pramanas</div></div>
+<div class="keypoint"><div class="keypoint-title">Vaisheshika</div><div class="keypoint-val">Atomic theory; Kanada; 9 categories of reality</div></div>
+<div class="keypoint"><div class="keypoint-title">Samkhya</div><div class="keypoint-val">Dualism of Purusha & Prakriti; Kapila; atheistic</div></div>
+<div class="keypoint"><div class="keypoint-title">Yoga</div><div class="keypoint-val">Patanjali's Yoga Sutras; Ashtanga yoga; union of body and mind</div></div>
+<div class="keypoint"><div class="keypoint-title">Mimansa</div><div class="keypoint-val">Jaimini; ritual action (karma-kanda); Vedic orthodoxy</div></div>
+<div class="keypoint"><div class="keypoint-title">Vedanta</div><div class="keypoint-val">Badarayana; based on Upanishads; sub-schools: Advaita (Shankara), Vishishtadvaita (Ramanuja), Dvaita (Madhva)</div></div>
+</div>
+
+<h2>Rig-Vedic Society & Polity</h2>
+
+<h3>Political Organization</h3>
+<p>The basic unit was the <strong>kula</strong> (family), then <em>grama</em> (village), <em>vis</em> (clan), <em>jana</em> (tribe), and <em>rashtra</em> (nation/kingdom). The king (<em>rajan</em>) was primarily a war leader. Tribal assemblies included:</p>
+<ul>
+<li><strong>Sabha:</strong> Assembly of elders/select men; judicial functions</li>
+<li><strong>Samiti:</strong> General assembly of all tribal members; more democratic</li>
+<li><strong>Vidhata:</strong> Oldest assembly; both men and women participated</li>
+<li><strong>Gana:</strong> Military assembly</li>
+</ul>
+
+<h3>Social Structure</h3>
+<p>In the early Rig-Vedic period, society was relatively <strong>egalitarian</strong>. The Varna system based on <em>guna</em> (quality) and <em>karma</em> (work) was flexible. By the Later Vedic period, it became <strong>birth-based and rigid</strong>. The Purusha Sukta (Rig-Veda X.90) describes the origin of four varnas from the cosmic Purusha: <em>Brahmanas</em> from mouth, <em>Kshatriyas</em> from arms, <em>Vaishyas</em> from thighs, <em>Shudras</em> from feet.</p>
+
+<h3>Economy</h3>
+<p>Primarily pastoral (cattle-based) in the early period. <em>Gavisti</em> (search for cattle) was a term for war. Cattle was the primary form of wealth and medium of exchange. Agriculture became more important in the Later Vedic period with the use of iron tools and the settlement of the Gangetic plains.</p>
+
+<h3>Position of Women</h3>
+<p>In the early Rig-Vedic period, women had better status: they composed hymns (<em>Gargi, Maitreyi, Lopamudra</em>), participated in sabha and samiti, chose their own husbands (<em>swayamvara</em>). In the Later Vedic period, women's status deteriorated — education was denied, child marriages began, and widow remarriage was discouraged.</p>
+
+<div class="highlight-box green">
+<h4>Early vs Later Vedic Period – Key Differences</h4>
+<p><strong>Early:</strong> Pastoral economy, tribal polity, flexible varnas, women with higher status, Indra most important deity | <strong>Later:</strong> Agricultural economy, monarchical polity, rigid caste, women marginalized, Prajapati/Vishnu/Shiva rise to prominence</p>
+</div>
+
+<div class="upsc-tip">UPSC frequently asks: Sabha vs Samiti; names of Vedas and their features; the Upanishads' core concepts; Boghazkoi inscription; important women of the Vedic period; Rig-Vedic cattle economy vs Later Vedic iron agriculture; origins of the caste system.</div>
+`
+},
+
+'buddhism': {
+  tag: 'Ancient History',
+  title: 'Buddhism',
+  read: '22 min read',
+  importance: 'High – Prelims & Mains GS-I',
+  body: `
+<h2>Background: Age of Heterodoxy (6th–5th Century BCE)</h2>
+<p>Buddhism emerged in the <strong>6th century BCE</strong> during a period of intense religious and philosophical ferment in India. The 16 <em>Mahajanapadas</em> were forming, trade was expanding, and the rigid Brahmanical caste system was facing widespread dissatisfaction. The Shramana movement (non-Vedic, anti-ritualistic) was gaining ground. Buddhism and Jainism were the most influential products of this intellectual revolution.</p>
+
+<h2>Life of Gautama Buddha</h2>
+<div class="timeline">
+<div class="timeline-item"><div class="timeline-year">c. 563 BCE</div><div class="timeline-text">Born as <strong>Siddhartha Gautama</strong> at Lumbini (now Nepal) to King Suddhodana of the Shakya clan. Mother: Maya Devi. Clan: Shakya (hence called Shakyamuni)</div></div>
+<div class="timeline-item"><div class="timeline-year">~29 years</div><div class="timeline-text">Renounced family at 29 after encountering the <strong>Four Sights</strong>: an old man, a sick man, a corpse, and an ascetic — called the <em>Mahabhinishkramana</em> (Great Renunciation)</div></div>
+<div class="timeline-item"><div class="timeline-year">~35 years</div><div class="timeline-text"><strong>Enlightenment (Nirvana/Bodhi)</strong> under the Bodhi Tree at Bodh Gaya (Uruvela). Became the <em>Buddha</em> (Awakened One)</div></div>
+<div class="timeline-item"><div class="timeline-year">Post-enlightenment</div><div class="timeline-text"><strong>First sermon</strong> at Deer Park (Sarnath) — the <em>Dhammachakkapavattana Sutta</em> (Turning of the Wheel of Dharma) to the five ascetics</div></div>
+<div class="timeline-item"><div class="timeline-year">c. 483 BCE</div><div class="timeline-text"><strong>Mahaparinirvana</strong> (death) at Kushinagar at age 80. Last words: "All things are impermanent; strive diligently."</div></div>
+</div>
+
+<h2>Core Teachings of Buddhism</h2>
+
+<h3>The Four Noble Truths (Arya Satya)</h3>
+<ol>
+<li><strong>Dukkha:</strong> Life is suffering/unsatisfactory</li>
+<li><strong>Samudaya:</strong> Suffering arises from desire/craving (tanha)</li>
+<li><strong>Nirodha:</strong> Cessation of suffering is possible by eliminating desire</li>
+<li><strong>Magga:</strong> The path to cessation is the Noble Eightfold Path</li>
+</ol>
+
+<h3>The Noble Eightfold Path (Ashtangika Marga)</h3>
+<div class="keypoint-grid">
+<div class="keypoint"><div class="keypoint-title">Right View</div><div class="keypoint-val">Understanding the Four Noble Truths</div></div>
+<div class="keypoint"><div class="keypoint-title">Right Intention</div><div class="keypoint-val">Commitment to ethical development</div></div>
+<div class="keypoint"><div class="keypoint-title">Right Speech</div><div class="keypoint-val">No lying, harsh speech, or gossip</div></div>
+<div class="keypoint"><div class="keypoint-title">Right Action</div><div class="keypoint-val">No killing, stealing, sexual misconduct</div></div>
+<div class="keypoint"><div class="keypoint-title">Right Livelihood</div><div class="keypoint-val">Earn living without harming others</div></div>
+<div class="keypoint"><div class="keypoint-title">Right Effort</div><div class="keypoint-val">Cultivate positive, abandon negative states</div></div>
+<div class="keypoint"><div class="keypoint-title">Right Mindfulness</div><div class="keypoint-val">Awareness of body, feelings, mind</div></div>
+<div class="keypoint"><div class="keypoint-title">Right Concentration</div><div class="keypoint-val">Meditative absorption leading to insight</div></div>
+</div>
+
+<h3>Other Key Doctrines</h3>
+<ul>
+<li><strong>Pratityasamutpada (Dependent Origination):</strong> All things arise in dependence on conditions — the 12-link chain of causation explaining the cycle of suffering (samsara)</li>
+<li><strong>Anatman (No-Self):</strong> There is no permanent, unchanging self — one of Buddhism's most distinctive teachings, rejecting the Upanishadic Atman</li>
+<li><strong>Anicca (Impermanence):</strong> All conditioned phenomena are transient</li>
+<li><strong>Ahimsa:</strong> Non-violence towards all living beings</li>
+<li><strong>Middle Path (Majjhima Patipada):</strong> Avoiding extremes of sensual indulgence and severe asceticism</li>
+<li><strong>Nirvana:</strong> The ultimate goal — cessation of suffering and release from the cycle of rebirth; described as extinguishing of the "three fires" (greed, hatred, delusion)</li>
+</ul>
+
+<h2>Buddhist Sangha & Councils</h2>
+<p>Buddha established the <strong>Triratna</strong> (Three Jewels): Buddha (the teacher), Dhamma (the teaching), and Sangha (the community). Women were admitted to the Sangha — the first being <em>Mahaprajapati Gautami</em>, Buddha's aunt.</p>
+
+<table class="info-table">
+<tr><th>Council</th><th>Date</th><th>Place</th><th>Patron</th><th>Outcome</th></tr>
+<tr><td>1st</td><td>483 BCE</td><td>Rajagriha (Sattapanni Cave)</td><td>King Ajatashatru</td><td>Compilation of Vinaya Pitaka & Dhamma Pitaka by Upali & Ananda</td></tr>
+<tr><td>2nd</td><td>383 BCE</td><td>Vaishali</td><td>King Kalashoka</td><td>Dispute over 10 points of discipline; first schism between Sthaviravada & Mahasanghika</td></tr>
+<tr><td>3rd</td><td>250 BCE</td><td>Pataliputra</td><td>Ashoka</td><td>Presided by Moggaliputta-Tissa; compilation of Abhidhamma Pitaka; purification of Sangha</td></tr>
+<tr><td>4th</td><td>1st Century CE</td><td>Kashmir (Kundalavana)</td><td>Kanishka</td><td>Presided by Vasumitra; codification of Mahayana texts; formal Hinayana-Mahayana split</td></tr>
+</table>
+
+<h2>Schools of Buddhism</h2>
+<ul>
+<li><strong>Hinayana (Theravada):</strong> "Lesser Vehicle" — conservative; individual salvation; Buddha as a great teacher (not divine); Pali language; prevalent in Sri Lanka, SE Asia</li>
+<li><strong>Mahayana:</strong> "Greater Vehicle" — universal salvation (Bodhisattva ideal); Buddha as divine; Sanskrit texts; prevalent in China, Japan, Korea, Tibet, Vietnam</li>
+<li><strong>Vajrayana:</strong> "Diamond Vehicle" — Tantric Buddhism; prevalent in Tibet (Tibetan Buddhism)</li>
+</ul>
+
+<h2>Buddhist Scriptures: Tripitaka</h2>
+<ul>
+<li><strong>Vinaya Pitaka:</strong> Rules and discipline for monks and nuns</li>
+<li><strong>Sutta Pitaka:</strong> Discourses and teachings of Buddha (largest of three; includes Dhammapada)</li>
+<li><strong>Abhidhamma Pitaka:</strong> Philosophical and psychological analysis of Dhamma</li>
+</ul>
+
+<h2>Important Buddhist Sites</h2>
+<div class="keypoint-grid">
+<div class="keypoint"><div class="keypoint-title">Lumbini</div><div class="keypoint-val">Birthplace (Nepal); Ashokan pillar with inscription</div></div>
+<div class="keypoint"><div class="keypoint-title">Bodh Gaya</div><div class="keypoint-val">Enlightenment; Mahabodhi Temple (UNESCO WHS)</div></div>
+<div class="keypoint"><div class="keypoint-title">Sarnath</div><div class="keypoint-val">First sermon; Dhamek Stupa; Ashoka Pillar (Lion Capital — national emblem)</div></div>
+<div class="keypoint"><div class="keypoint-title">Kushinagar</div><div class="keypoint-val">Mahaparinirvana (death)</div></div>
+<div class="keypoint"><div class="keypoint-title">Sanchi</div><div class="keypoint-val">Great Stupa (Ashoka); UNESCO WHS; finest Buddhist art</div></div>
+<div class="keypoint"><div class="keypoint-title">Nalanda</div><div class="keypoint-val">Great Buddhist university; flourished 5th–12th century CE</div></div>
+</div>
+
+<div class="upsc-tip">Key UPSC questions: Four Noble Truths; Eightfold Path; Four Buddhist Councils; Hinayana vs Mahayana; Tripitaka; Bodhisattva concept; Buddhist sites and their significance; Ashokan patronage; differences between Buddhism and Jainism.</div>
+`
+},
+
+'jainism': {
+  tag: 'Ancient History',
+  title: 'Jainism',
+  read: '15 min read',
+  importance: 'High – Prelims GS-I',
+  body: `
+<h2>Introduction</h2>
+<p>Jainism is one of the oldest religions of India and a major product of the <strong>Shramana tradition</strong>. Its roots predate Vardhamana Mahavira — the tradition recognizes <strong>24 Tirthankaras</strong> (ford-makers/spiritual teachers). Mahavira was the <strong>24th and last Tirthankara</strong>, and the principal historical figure of Jainism.</p>
+
+<h2>Tirthankaras</h2>
+<ul>
+<li><strong>Rishabhanatha (Adinatha):</strong> 1st Tirthankara; mentioned in Rig-Veda and Vishnu Purana — suggesting Jainism's antiquity</li>
+<li><strong>Parshvanatha:</strong> 23rd Tirthankara; lived c. 877–777 BCE; preached four vows: non-violence, truth, non-stealing, non-possession</li>
+<li><strong>Vardhamana Mahavira:</strong> 24th Tirthankara; added the 5th vow of celibacy (brahmacharya)</li>
+</ul>
+
+<h2>Life of Mahavira</h2>
+<div class="timeline">
+<div class="timeline-item"><div class="timeline-year">599 BCE (approx.)</div><div class="timeline-text">Born at Kundagrama (Vaishali, Bihar) to King Siddhartha and Queen Trishala of the Lichhavi clan. Real name: <strong>Vardhamana</strong></div></div>
+<div class="timeline-item"><div class="timeline-year">~30 years</div><div class="timeline-text">Renounced family life; became an ascetic. Wandered for 12 years practicing severe austerities</div></div>
+<div class="timeline-item"><div class="timeline-year">~42 years</div><div class="timeline-text">Attained <strong>Kaivalya</strong> (omniscience/enlightenment) at Jrimbhikagrama (Bihar) under a Sal tree. Became the <em>Jina</em> (conqueror) — hence Jainism</div></div>
+<div class="timeline-item"><div class="timeline-year">527 BCE</div><div class="timeline-text">Died at <strong>Pavapuri</strong> (Bihar) at age 72 — called <em>Nirvana</em> (liberation from the cycle of rebirth)</div></div>
+</div>
+
+<h2>Core Teachings of Jainism</h2>
+
+<h3>The Five Vows (Pancha Mahavrata)</h3>
+<ol>
+<li><strong>Ahimsa:</strong> Non-violence — the supreme principle of Jainism; most rigorous interpretation in any religion</li>
+<li><strong>Satya:</strong> Truthfulness</li>
+<li><strong>Asteya:</strong> Non-stealing</li>
+<li><strong>Brahmacharya:</strong> Celibacy (added by Mahavira to Parshva's four)</li>
+<li><strong>Aparigraha:</strong> Non-possession/detachment from material things</li>
+</ol>
+
+<h3>Three Jewels (Triratna)</h3>
+<ul>
+<li><strong>Samyak Darshana:</strong> Right faith — correct perception of truth</li>
+<li><strong>Samyak Jnana:</strong> Right knowledge — of the universe and soul</li>
+<li><strong>Samyak Charitra:</strong> Right conduct — following the five vows</li>
+</ul>
+
+<h3>Key Philosophical Concepts</h3>
+<ul>
+<li><strong>Anekantavada (Doctrine of Many-Sidedness):</strong> Reality is complex and can be viewed from multiple perspectives — a form of philosophical pluralism</li>
+<li><strong>Syadvada (Theory of Conditional Predication):</strong> Any statement about reality can only be conditionally true — expressed using "syat" (maybe/in some sense); seven predicates possible</li>
+<li><strong>Nayavada:</strong> Every viewpoint captures partial truth</li>
+<li><strong>Soul (Jiva):</strong> Every living being has an eternal soul; even plants, bacteria, and earth have souls</li>
+<li><strong>Karma:</strong> Material substance that binds the soul; liberation requires eliminating karma through right conduct</li>
+<li><strong>Moksha:</strong> Liberation of the soul from all karmic matter; soul reaches Siddha-loka (realm of liberated souls) at top of universe</li>
+</ul>
+
+<h2>Schism: Digambara vs Shvetambara</h2>
+<table class="info-table">
+<tr><th>Aspect</th><th>Digambara</th><th>Shvetambara</th></tr>
+<tr><td>Meaning</td><td>"Sky-clad" (monks go naked)</td><td>"White-clad" (white robes)</td></tr>
+<tr><td>Origin of split</td><td>During 12-year famine, Bhadrabahu led group to South India</td><td>Stayed in North India; led by Sthulabhadra</td></tr>
+<tr><td>Women's salvation</td><td>Women cannot attain moksha in female body</td><td>Women can attain moksha</td></tr>
+<tr><td>Mahavira's marriage</td><td>Never married</td><td>Was married (to Yashoda)</td></tr>
+<tr><td>Strong presence</td><td>Karnataka, Rajasthan</td><td>Gujarat, Rajasthan</td></tr>
+</table>
+
+<h2>Jain Councils</h2>
+<ul>
+<li><strong>1st Council:</strong> Pataliputra (c. 300 BCE); under Sthulabhadra; compilation of Jain canon (12 Angas) — Digambaras don't accept this</li>
+<li><strong>2nd Council:</strong> Vallabhi, Gujarat (453 CE or 526 CE); under Devardhigani; final compilation of Shvetambara canon</li>
+</ul>
+
+<div class="highlight-box">
+<h4>Jainism vs Buddhism – Key Comparison</h4>
+<p><strong>Common:</strong> Both oppose Brahmanical orthodoxy, both deny Vedic authority, both practice non-violence. <strong>Different:</strong> Jainism believes in soul (jiva); Buddhism denies permanent self (anatman). Jainism's ahimsa is more extreme (harm to microorganisms). Buddhism preaches the Middle Path; Jainism accepts extreme asceticism.</p>
+</div>
+
+<div class="upsc-tip">UPSC tests: Three Jewels and Five Vows; Anekantavada/Syadvada; Digambara vs Shvetambara; Jain Councils; Mahavira's life; how Jainism differs from Buddhism philosophically.</div>
+`
+},
+
+'maurya': {
+  tag: 'Ancient History',
+  title: 'Maurya Empire',
+  read: '30 min read',
+  importance: 'Very High – Prelims & Mains GS-I',
+  body: `
+<h2>Background: Mahajanapadas & Pre-Mauryan India</h2>
+<p>By the 6th century BCE, the Indian subcontinent had sixteen major kingdoms called <strong>Mahajanapadas</strong>. Of these, <strong>Magadha</strong> (in present-day Bihar) emerged as the most powerful, due to advantages: fertile Gangetic plains, iron ore resources, elephant forests, trade route access, and able rulers.</p>
+
+<div class="highlight-box">
+<h4>The Sixteen Mahajanapadas</h4>
+<p>Kasi, Kosala, Anga, <strong>Magadha</strong>, Vajji, Malla, Chedi, Vatsa, Kuru, Panchala, Machcha (Matsya), Surasena, Assaka, Avanti, Gandhara, Kamboja</p>
+</div>
+
+<p>Magadha's path to dominance: <strong>Haryanka dynasty</strong> (Bimbisara, Ajatashatru) → <strong>Shishunaga dynasty</strong> → <strong>Nanda dynasty</strong> → <strong>Maurya dynasty</strong></p>
+
+<h2>Foundation of the Maurya Empire</h2>
+<p><strong>Chandragupta Maurya</strong> (321–297 BCE) overthrew the Nanda dynasty with the help of his mentor <strong>Chanakya</strong> (Kautilya/Vishnugupta), the brilliant statesman-philosopher. Their partnership is one of history's greatest. Chanakya's political treatise, the <em>Arthashastra</em>, is the foundational text of Indian political science.</p>
+
+<div class="timeline">
+<div class="timeline-item"><div class="timeline-year">321 BCE</div><div class="timeline-text">Chandragupta defeats last Nanda king Dhana Nanda; establishes Maurya Empire with capital at Pataliputra</div></div>
+<div class="timeline-item"><div class="timeline-year">305 BCE</div><div class="timeline-text">Defeats Seleucus Nicator (successor of Alexander); gains territories of Afghanistan and Baluchistan; treaty includes Seleucus giving his daughter in marriage; ambassador Megasthenes sent to Pataliputra</div></div>
+<div class="timeline-item"><div class="timeline-year">297 BCE</div><div class="timeline-text">Chandragupta abdicates; converts to Jainism; travels to Shravanabelagola (Karnataka) with Jain monk Bhadrabahu; dies by Santhara (Jain ritual fast unto death)</div></div>
+<div class="timeline-item"><div class="timeline-year">297–273 BCE</div><div class="timeline-text"><strong>Bindusara</strong> ("Amitraghata" — slayer of enemies); expands empire; receives ambassador Deimachus from Seleucid court</div></div>
+<div class="timeline-item"><div class="timeline-year">268–232 BCE</div><div class="timeline-text"><strong>Ashoka</strong> — the most celebrated Mauryan emperor</div></div>
+<div class="timeline-item"><div class="timeline-year">185 BCE</div><div class="timeline-text">Last Mauryan king Brihadratha killed by his general <strong>Pushyamitra Shunga</strong>, founding the Shunga dynasty</div></div>
+</div>
+
+<h2>Ashoka the Great (268–232 BCE)</h2>
+
+<h3>The Kalinga War (261 BCE) — The Turning Point</h3>
+<p>Ashoka's conquest of Kalinga (present-day Odisha) was a pivotal event. The war was immensely brutal — the 13th Rock Edict mentions <strong>1,00,000 killed, 1,50,000 deported, and many more died</strong>. Ashoka was deeply moved by this carnage. He converted to Buddhism (influenced by monk Upagupta) and adopted the policy of <em>Dhamma Vijaya</em> (conquest by righteousness) over <em>Bherighosha</em> (war drums), replacing it with <em>Dhammaghosha</em> (sound of Dhamma).</p>
+
+<h3>Ashoka's Dhamma</h3>
+<p>Ashoka's Dhamma was not pure Buddhism but a set of universally applicable ethical principles:</p>
+<ul>
+<li>Non-violence (ahimsa) and respect for all life</li>
+<li>Tolerance of all religious sects</li>
+<li>Obedience to parents, teachers, and elders</li>
+<li>Liberality to Brahmins and ascetics</li>
+<li>Abstention from killing animals; reduction in meat consumption</li>
+<li>Promotion of welfare through wells, hospitals, road planting of trees</li>
+</ul>
+
+<h3>Ashoka's Edicts</h3>
+<p>Ashoka's edicts, inscribed on pillars and rocks across the empire, are primary sources. Types:</p>
+<ul>
+<li><strong>Rock Edicts (14 Major + 2 Minor + Kalinga specific):</strong> Policy announcements; largest at Shahbazgarhi (Pakistan) and Mansehra</li>
+<li><strong>Pillar Edicts (7 Major + Minor):</strong> Administrative and Dhamma instructions; Sarnath pillar has the famous Lion Capital (India's national emblem)</li>
+</ul>
+
+<div class="highlight-box blue">
+<h4>Key Ashoka Edicts — What to Remember</h4>
+<p><strong>13th Rock Edict:</strong> Account of Kalinga war and Ashoka's remorse | <strong>12th Rock Edict:</strong> Religious tolerance | <strong>5th Rock Edict:</strong> Appointment of Dhamma Mahamatras | <strong>2nd Rock Edict:</strong> Hospitals for humans and animals | <strong>7th Pillar Edict:</strong> Summary of all Dhamma activities</p>
+</div>
+
+<h2>Mauryan Administration</h2>
+
+<h3>Central Administration</h3>
+<ul>
+<li>The king was the supreme authority; advised by a <em>Mantriparishad</em> (council of ministers)</li>
+<li>Important officials: <em>Mantri</em> (ministers), <em>Senapati</em> (army chief), <em>Yuvaraj</em> (crown prince), <em>Purohita</em> (chief priest), <em>Amatya</em> (revenue minister)</li>
+<li>Espionage system: Comprehensive network of spies (<em>Gudhapurushas</em>) detailed in Arthashastra</li>
+</ul>
+
+<h3>Provincial Administration</h3>
+<p>Empire divided into <strong>4 provinces</strong>, each headed by a <em>Kumara</em> (prince): Uttarapatha (Taxila), Avantipatha (Ujjain), Dakshinapatha (Suvarnagiri), Kalinga (Tosali). Capital: Pataliputra</p>
+
+<h3>Economy & Infrastructure</h3>
+<ul>
+<li>Grand Trunk Road (<em>Uttarapatha</em>) from Taxila to Pataliputra</li>
+<li>State-controlled agriculture; detailed land revenue system</li>
+<li>Six boards managing Pataliputra (Megasthenes); each with five members</li>
+<li>State-owned forests, mines, and elephants</li>
+</ul>
+
+<h2>Sources for Mauryan History</h2>
+<ul>
+<li><strong>Arthashastra</strong> by Kautilya — comprehensive manual of governance</li>
+<li><strong>Indica</strong> by Megasthenes (Greek ambassador) — contemporary account</li>
+<li><strong>Ashokan Edicts</strong> — first-hand primary source</li>
+<li><strong>Puranas</strong> — dynastic history</li>
+<li><strong>Buddhist texts</strong> — Ashokavadana, Dipavamsa, Mahavamsa</li>
+</ul>
+
+<div class="upsc-tip">UPSC frequently tests: Kalinga war and its impact; Ashoka's Dhamma vs Buddhism; edicts and their content; Arthashastra administration; Megasthenes' Indica; reasons for decline of Maurya Empire (weak successors, financial strain, Brahmin revolt, division of empire).</div>
+`
+},
+
+'mughal': {
+  tag: 'Medieval History',
+  title: 'The Mughal Empire',
+  read: '28 min read',
+  importance: 'Very High – Prelims & Mains GS-I',
+  body: `
+<h2>Foundation of the Mughal Empire</h2>
+<p>The Mughal Empire was founded by <strong>Babur</strong> in 1526 after his victory at the <strong>First Battle of Panipat</strong> against Ibrahim Lodi. The Mughals were descendants of Timur (Timurids) on the father's side and Genghis Khan on the mother's side — hence the name "Mughal" (a corruption of "Mongol").</p>
+
+<h2>Major Mughal Emperors</h2>
+
+<h3>Babur (1526–1530)</h3>
+<ul>
+<li>1st Battle of Panipat (1526): Defeated Ibrahim Lodi; first use of gunpowder artillery in India</li>
+<li>Battle of Khanwa (1527): Defeated Rajput confederacy under Rana Sanga</li>
+<li>Battle of Ghaghra (1529): Defeated Afghan confederacy</li>
+<li>Wrote the <em>Baburnama</em> (autobiography in Chagatai Turkic) — a literary masterpiece</li>
+</ul>
+
+<h3>Humayun (1530–1540, 1555–1556)</h3>
+<ul>
+<li>Lost empire to <strong>Sher Shah Suri</strong> at Battles of Chausa (1539) and Kanauj (1540)</li>
+<li>Spent 15 years in exile (Persia, Sindh, Afghanistan)</li>
+<li>Regained throne in 1555; died in 1556 falling from library stairs</li>
+<li>Sher Shah Suri's administration: introduced Grand Trunk Road, Rupiya coin, Postal system — lasting legacy</li>
+</ul>
+
+<h3>Akbar the Great (1556–1605)</h3>
+<p>Akbar was the greatest of the Mughal emperors, known for his administrative genius, religious tolerance, and policy of incorporation of Rajputs.</p>
+
+<div class="timeline">
+<div class="timeline-item"><div class="timeline-year">1556</div><div class="timeline-text"><strong>2nd Battle of Panipat</strong>: Akbar (under regent Bairam Khan) defeats Hemu (Hemchandra Vikramaditya)</div></div>
+<div class="timeline-item"><div class="timeline-year">1562</div><div class="timeline-text">Marriage with Jodha Bai (Harka Bai) of Amber; starts Rajput matrimonial alliance policy; abolishes enslavement of war prisoners' families</div></div>
+<div class="timeline-item"><div class="timeline-year">1563</div><div class="timeline-text">Abolishes <em>pilgrim tax</em> on Hindus</div></div>
+<div class="timeline-item"><div class="timeline-year">1564</div><div class="timeline-text">Abolishes <em>Jizya</em> (poll tax on non-Muslims)</div></div>
+<div class="timeline-item"><div class="timeline-year">1571</div><div class="timeline-text">Construction of Fatehpur Sikri begins; Buland Darwaza built to commemorate Gujarat conquest</div></div>
+<div class="timeline-item"><div class="timeline-year">1575</div><div class="timeline-text">Ibadat Khana (House of Worship) built at Fatehpur Sikri for religious debates</div></div>
+<div class="timeline-item"><div class="timeline-year">1579</div><div class="timeline-text">Mahzar (declaration): Akbar declared supreme in religious disputes — strengthens state authority over clergy</div></div>
+<div class="timeline-item"><div class="timeline-year">1582</div><div class="timeline-text"><em>Din-i-Ilahi</em> (Divine Faith) proclaimed — syncretic religion; Birbal was only Hindu to accept it</div></div>
+</div>
+
+<h4>Akbar's Administrative Reforms</h4>
+<ul>
+<li><strong>Mansabdari System:</strong> All nobles and military officers ranked by <em>zat</em> (personal rank) and <em>sawar</em> (cavalry contingent rank); salaries paid in cash or jagirs</li>
+<li><strong>Zabt System (Todar Mal's Land Revenue):</strong> Raja Todar Mal reformed land revenue; classification of land (polaj, parauti, chachar, banjar); revenue based on 10-year average; direct measurement</li>
+<li><strong>Subah System:</strong> Empire divided into 15 (later 18) Subahs (provinces); each headed by a Subedar (governor)</li>
+<li><strong>Akbarnama:</strong> Written by Abul Fazl; biography of Akbar; Ain-i-Akbari (3rd part) — encyclopedic account of the empire</li>
+</ul>
+
+<h3>Jahangir (1605–1627)</h3>
+<ul>
+<li>Known for justice and love of arts/nature; wrote <em>Tuzuk-i-Jahangiri</em> (memoirs)</li>
+<li><strong>Chain of Justice</strong> (Zanjir-e-Adl) at Agra Fort — anyone could petition the king directly</li>
+<li>Real power wielded by <em>Nur Jahan</em> (his wife) — only Mughal woman to have coins struck in her name and farmans issued</li>
+<li>Captain Hawkins and Sir Thomas Roe (British) visited during his reign</li>
+</ul>
+
+<h3>Shah Jahan (1628–1658)</h3>
+<ul>
+<li>Golden age of Mughal architecture: <strong>Taj Mahal</strong> (1632–53, in memory of Mumtaz Mahal), Red Fort (Delhi), Jama Masjid (Delhi), Moti Masjid (Agra)</li>
+<li>Peacock Throne (<em>Takht-e-Taus</em>) — most magnificent royal throne</li>
+<li>Overthrown by his son Aurangzeb in 1658; imprisoned in Agra Fort till death (1666)</li>
+</ul>
+
+<h3>Aurangzeb (1658–1707)</h3>
+<ul>
+<li>Last great Mughal; ruled longest of all Mughals; empire reached greatest geographic extent</li>
+<li>Reversed Akbar's policies: reimposed Jizya (1679), destroyed Hindu temples, banned music and fine arts</li>
+<li>Long Deccan campaigns exhausted treasury and army</li>
+<li>Death in 1707 triggers rapid decline — "War of Succession" repeatedly drained imperial resources</li>
+</ul>
+
+<h2>Mughal Architecture & Culture</h2>
+<p>Mughal architecture synthesized <strong>Persian, Timurid, and Indian</strong> elements. Key features: bulbous domes, pietra dura (stone inlay), arched gateways, formal gardens (Charbagh), minarets, red sandstone and white marble.</p>
+
+<h2>Decline of the Mughal Empire</h2>
+<ul>
+<li><strong>Weak successors</strong> after Aurangzeb — "Later Mughals"</li>
+<li><strong>Maratha challenge</strong> under Shivaji and successors</li>
+<li><strong>Nadir Shah's invasion</strong> (1739) — sacked Delhi, took Peacock Throne and Kohinoor</li>
+<li><strong>Afghan invasions</strong> of Ahmad Shah Abdali</li>
+<li><strong>Rise of regional powers:</strong> Hyderabad, Bengal, Awadh, Mysore, Maratha Confederacy</li>
+<li><strong>British East India Company</strong> expanding; Battle of Plassey (1757)</li>
+<li>Last Mughal: <strong>Bahadur Shah Zafar II</strong> — deposed by British in 1858 after Revolt of 1857</li>
+</ul>
+
+<div class="upsc-tip">UPSC frequently tests: Battles (Panipat I, II, III); Akbar's administrative reforms; Din-i-Ilahi; Todar Mal's revenue system; architectural monuments; Aurangzeb's policies and decline; Nur Jahan's role; Sher Shah Suri's contributions.</div>
+`
+},
+
+'constitution-historical': {
+  tag: 'Indian Polity',
+  title: 'Constitutional Historical Underpinnings',
+  read: '18 min read',
+  importance: 'High – Prelims & Mains GS-II',
+  body: `
+<h2>Historical Background</h2>
+<p>India's Constitution did not emerge in a vacuum. It was shaped by decades of colonial legislation, nationalist thought, and international constitutional models. Understanding the historical evolution of India's constitutional framework is essential for UPSC.</p>
+
+<h2>Colonial Constitutional Acts</h2>
+
+<table class="info-table">
+<tr><th>Act</th><th>Year</th><th>Key Provisions</th></tr>
+<tr><td><strong>Regulating Act</strong></td><td>1773</td><td>First step towards centralised control; Governor-General of Bengal; Supreme Court at Calcutta; Board of Directors oversight</td></tr>
+<tr><td><strong>Pitt's India Act</strong></td><td>1784</td><td>Dual control: Board of Control (political) + Court of Directors (commercial); Company under Crown supervision</td></tr>
+<tr><td><strong>Charter Act</strong></td><td>1813</td><td>End of Company's trade monopoly (except tea and China trade); Christian missionaries allowed; education grant</td></tr>
+<tr><td><strong>Charter Act</strong></td><td>1833</td><td>Company loses all trading functions; Governor-General of India created; Law Commission; first step toward centralization</td></tr>
+<tr><td><strong>Charter Act</strong></td><td>1853</td><td>Separation of executive and legislative functions; open competitive civil service examination; last Charter Act</td></tr>
+<tr><td><strong>Government of India Act</strong></td><td>1858</td><td>Company rule ends; Crown rule begins; Secretary of State for India; Council of India (15 members)</td></tr>
+<tr><td><strong>Indian Councils Act</strong></td><td>1861</td><td>Indians in legislative councils; decentralization; portfolio system; ordinance power for Viceroy</td></tr>
+<tr><td><strong>Indian Councils Act</strong></td><td>1892</td><td>Enlarged legislative councils; indirect elections; budget discussion allowed</td></tr>
+<tr><td><strong>Morley-Minto Reforms</strong></td><td>1909</td><td>Direct elections introduced; communal representation for Muslims (separate electorate — divisive legacy)</td></tr>
+<tr><td><strong>Montagu-Chelmsford Reforms</strong></td><td>1919</td><td>Dyarchy in provinces; bicameral central legislature; direct elections expanded; communal electorate extended; list system</td></tr>
+<tr><td><strong>Simon Commission</strong></td><td>1927–30</td><td>All-British commission — boycotted by Indians ("Simon Go Back"); recommended abolition of dyarchy</td></tr>
+<tr><td><strong>Government of India Act</strong></td><td>1935</td><td>Federal structure; All-India Federation (proposed); Provincial autonomy; dyarchy at Centre; Federal Court; RBI; most important pre-independence act — much of it incorporated in India's Constitution</td></tr>
+<tr><td><strong>Indian Independence Act</strong></td><td>1947</td><td>Two dominions — India and Pakistan; Constituent Assembly sovereign; Governor-General by Crown; lapse of paramountcy over princely states</td></tr>
+</table>
+
+<h2>Constituent Assembly</h2>
+<ul>
+<li>Formed under <strong>Cabinet Mission Plan</strong> (1946)</li>
+<li>Total members: <strong>389</strong> (after partition: 299)</li>
+<li>Began work on <strong>9 December 1946</strong></li>
+<li>Permanent Chairman: <strong>Dr. Rajendra Prasad</strong></li>
+<li>Constitutional Advisor: <strong>B.N. Rau</strong></li>
+<li>Drafting Committee Chairman: <strong>Dr. B.R. Ambedkar</strong> — often called "Father of the Indian Constitution"</li>
+<li>Adopted: <strong>26 November 1949</strong> (Constitution Day)</li>
+<li>Came into effect: <strong>26 January 1950</strong> (Republic Day)</li>
+<li>Time taken: 2 years, 11 months, 18 days</li>
+<li>Sessions: 11 sessions; 166 days of debates</li>
+</ul>
+
+<h3>Sources of the Indian Constitution</h3>
+<div class="keypoint-grid">
+<div class="keypoint"><div class="keypoint-title">Government of India Act 1935</div><div class="keypoint-val">Federal scheme, Office of Governor, Judiciary, Public Service Commissions, Emergency provisions</div></div>
+<div class="keypoint"><div class="keypoint-title">British Constitution</div><div class="keypoint-val">Parliamentary government, Rule of Law, Single citizenship, Cabinet system, Prerogative writs</div></div>
+<div class="keypoint"><div class="keypoint-title">US Constitution</div><div class="keypoint-val">Fundamental Rights, Judicial review, Independence of Judiciary, Preamble, Removal of Supreme Court judges</div></div>
+<div class="keypoint"><div class="keypoint-title">Irish Constitution</div><div class="keypoint-val">Directive Principles of State Policy, Method of election of President, Nomination of members to Rajya Sabha</div></div>
+<div class="keypoint"><div class="keypoint-title">Canadian Constitution</div><div class="keypoint-val">Federation with strong Centre, Residuary powers with Centre, Advisory jurisdiction of Supreme Court</div></div>
+<div class="keypoint"><div class="keypoint-title">Australian Constitution</div><div class="keypoint-val">Concurrent List, Joint sitting of Parliament, Freedom of trade and commerce</div></div>
+<div class="keypoint"><div class="keypoint-title">German (Weimar) Constitution</div><div class="keypoint-val">Emergency provisions (suspension of Fundamental Rights)</div></div>
+<div class="keypoint"><div class="keypoint-title">South African Constitution</div><div class="keypoint-val">Procedure for amendment, Election of Rajya Sabha members</div></div>
+<div class="keypoint"><div class="keypoint-title">USSR Constitution</div><div class="keypoint-val">Fundamental Duties, Ideals of justice (social, economic, political) in Preamble</div></div>
+<div class="keypoint"><div class="keypoint-title">French Constitution</div><div class="keypoint-val">Republic, Liberty, Equality, Fraternity ideals in Preamble</div></div>
+<div class="keypoint"><div class="keypoint-title">Japanese Constitution</div><div class="keypoint-val">Procedure established by law (Art.21)</div></div>
+</div>
+
+<div class="upsc-tip">The sources of constitutional provisions is a favourite UPSC question. Memorize: DPSP from Ireland; Fundamental Rights from USA; Emergency from Germany/Weimar; Concurrent list from Australia; Fundamental Duties from USSR. Also remember: GoI Act 1935 is the most important structural source.</div>
+`
+},
+
+'fundamental-rights': {
+  tag: 'Indian Polity',
+  title: 'Fundamental Rights',
+  read: '25 min read',
+  importance: 'Very High – Prelims & Mains GS-II',
+  body: `
+<h2>Introduction</h2>
+<p>Fundamental Rights are enshrined in <strong>Part III (Articles 12–35)</strong> of the Indian Constitution. They are justiciable — i.e., enforceable by courts. They are not absolute; they can be restricted by the state on reasonable grounds. The Supreme Court has called them the <em>"Magna Carta of India."</em></p>
+
+<h2>Article 12: Definition of State</h2>
+<p>Fundamental Rights operate against the "State," which includes: the <strong>Government and Parliament of India</strong>, Government and Legislature of each State, all local authorities, and <strong>other authorities within India or under the control of the Government of India</strong>. The Supreme Court has extended "other authorities" to include statutory corporations, government companies, and even some private bodies exercising public functions.</p>
+
+<h2>Article 13: Laws Inconsistent with Fundamental Rights</h2>
+<p>Laws inconsistent with Fundamental Rights are void to the extent of inconsistency. This is the basis of <strong>judicial review</strong> in India. Includes both pre-constitutional laws and post-constitutional laws.</p>
+
+<h2>The Six Categories of Fundamental Rights</h2>
+
+<h3>1. Right to Equality (Articles 14–18)</h3>
+<ul>
+<li><strong>Article 14:</strong> Equality before law and equal protection of laws. Two concepts: (a) <em>Equality before law</em> (British concept — no special privileges, state subject to law); (b) <em>Equal protection of laws</em> (American concept — equals should be treated equally; allows reasonable classification)</li>
+<li><strong>Article 15:</strong> Prohibition of discrimination on grounds of religion, race, caste, sex, place of birth. State can make special provisions for women, children, and socially/educationally backward classes (Art. 15(3) and 15(4)). 93rd Amendment added Art. 15(5) for OBC/SC/ST in educational institutions.</li>
+<li><strong>Article 16:</strong> Equality of opportunity in public employment. Allows reservations for backward classes, SC/ST, and persons inadequately represented in state services (Art. 16(4)). 103rd Amendment adds Art. 16(6) for 10% EWS reservation.</li>
+<li><strong>Article 17:</strong> Abolition of Untouchability — made punishable offence under Protection of Civil Rights Act 1955</li>
+<li><strong>Article 18:</strong> Abolition of titles — no titles except military or academic. No Indian citizen can accept foreign title without President's consent.</li>
+</ul>
+
+<h3>2. Right to Freedom (Articles 19–22)</h3>
+<ul>
+<li><strong>Article 19:</strong> Six freedoms for Indian citizens (original seven; right to property deleted by 44th Amendment, 1978):</li>
+</ul>
+<div class="keypoint-grid">
+<div class="keypoint"><div class="keypoint-title">19(1)(a)</div><div class="keypoint-val">Freedom of speech and expression — includes press freedom, right to silence, commercial speech; restricted by Art 19(2)</div></div>
+<div class="keypoint"><div class="keypoint-title">19(1)(b)</div><div class="keypoint-val">Assemble peacefully without arms — public meetings, processions</div></div>
+<div class="keypoint"><div class="keypoint-title">19(1)(c)</div><div class="keypoint-val">Form associations or unions — includes political parties, trade unions</div></div>
+<div class="keypoint"><div class="keypoint-title">19(1)(d)</div><div class="keypoint-val">Move freely throughout India</div></div>
+<div class="keypoint"><div class="keypoint-title">19(1)(e)</div><div class="keypoint-val">Reside and settle in any part of India</div></div>
+<div class="keypoint"><div class="keypoint-title">19(1)(g)</div><div class="keypoint-val">Practice any profession or carry on any occupation, trade, or business</div></div>
+</div>
+<ul>
+<li><strong>Article 20:</strong> Protection against arbitrary conviction — no ex post facto law (retroactive criminal law), no double jeopardy, no self-incrimination</li>
+<li><strong>Article 21:</strong> Protection of life and personal liberty — "No person shall be deprived of his life or personal liberty except according to procedure established by law." <strong>Most expansively interpreted article.</strong> Includes right to privacy (Puttaswamy judgment 2017), right to livelihood, right to education, right to health, right to a clean environment, right to die with dignity, etc.</li>
+<li><strong>Article 21A:</strong> Right to Education (inserted by 86th Amendment, 2002) — free and compulsory education for children 6–14 years; RTE Act 2009</li>
+<li><strong>Article 22:</strong> Protection against arrest and detention — right to be informed of grounds; right to consult a lawyer; production before magistrate within 24 hours; safeguards against preventive detention laws</li>
+</ul>
+
+<h3>3. Right Against Exploitation (Articles 23–24)</h3>
+<ul>
+<li><strong>Article 23:</strong> Prohibition of human trafficking and forced labour (<em>begar</em> and other similar forms)</li>
+<li><strong>Article 24:</strong> Prohibition of employment of children below 14 years in hazardous industries (mines, factories, construction)</li>
+</ul>
+
+<h3>4. Right to Freedom of Religion (Articles 25–28)</h3>
+<ul>
+<li><strong>Article 25:</strong> Freedom of conscience and free profession, practice and propagation of religion — subject to public order, morality, health, and other Fundamental Rights</li>
+<li><strong>Article 26:</strong> Freedom to manage religious affairs — establish/maintain institutions, manage own affairs in matters of religion, own/acquire property</li>
+<li><strong>Article 27:</strong> No compulsion to pay taxes for promotion of any particular religion</li>
+<li><strong>Article 28:</strong> No religious instruction in fully state-funded educational institutions</li>
+</ul>
+
+<h3>5. Cultural and Educational Rights (Articles 29–30)</h3>
+<ul>
+<li><strong>Article 29:</strong> Protection of interests of minorities — right to conserve distinct language, script, or culture; no denial of admission on grounds of religion, race, caste, or language</li>
+<li><strong>Article 30:</strong> Right of minorities to establish and administer educational institutions; state cannot discriminate against aided minority institutions in granting aid</li>
+</ul>
+
+<h3>6. Right to Constitutional Remedies (Article 32)</h3>
+<p><strong>Article 32</strong> — Dr. Ambedkar called it the <em>"heart and soul of the Constitution."</em> Gives citizens the right to move the Supreme Court for enforcement of Fundamental Rights. The Supreme Court can issue writs:</p>
+<table class="info-table">
+<tr><th>Writ</th><th>Meaning</th><th>Purpose</th></tr>
+<tr><td><strong>Habeas Corpus</strong></td><td>"You shall have the body"</td><td>Directs bringing a detained person before court; check illegal detention</td></tr>
+<tr><td><strong>Mandamus</strong></td><td>"We command"</td><td>Directs a public official/body to perform a mandatory duty</td></tr>
+<tr><td><strong>Prohibition</strong></td><td>"To forbid"</td><td>Issued by superior court to prevent inferior court from exceeding jurisdiction</td></tr>
+<tr><td><strong>Certiorari</strong></td><td>"To be certified"</td><td>Quashes order of inferior court/tribunal passed in excess of jurisdiction</td></tr>
+<tr><td><strong>Quo Warranto</strong></td><td>"By what authority"</td><td>Challenges unlawful assumption of public office</td></tr>
+</table>
+
+<div class="upsc-tip">Article 32 writs, Article 21 expansive interpretations (especially Maneka Gandhi case 1978 — changed 'procedure established by law' to be just, fair, and reasonable; similar to 'due process' in USA), Article 19 restrictions, and differences between Art 19-22 are highly tested in UPSC prelims and mains.</div>
+`
+},
+
+'intro-economics': {
+  tag: 'Basic Economics',
+  title: 'Introduction to Economics',
+  read: '20 min read',
+  importance: 'High – Prelims & Mains GS-III',
+  body: `
+<h2>What is Economics?</h2>
+<p>Economics is the study of how individuals, firms, and governments make choices under conditions of <strong>scarcity</strong> to satisfy unlimited wants. It examines the allocation of resources and the consequences of those choices.</p>
+
+<h2>Basic Concepts</h2>
+
+<h3>Microeconomics vs Macroeconomics</h3>
+<table class="info-table">
+<tr><th>Aspect</th><th>Microeconomics</th><th>Macroeconomics</th></tr>
+<tr><td>Focus</td><td>Individual units (consumers, firms)</td><td>Economy as a whole</td></tr>
+<tr><td>Concerns</td><td>Price determination, consumer behaviour, market structure</td><td>GDP, inflation, employment, monetary policy</td></tr>
+<tr><td>Key concepts</td><td>Demand, supply, elasticity, market equilibrium</td><td>National income, fiscal policy, balance of payments</td></tr>
+</table>
+
+<h3>Demand & Supply</h3>
+<p><strong>Law of Demand:</strong> All else being equal, as the price of a good increases, the quantity demanded decreases (inverse relationship). The demand curve slopes downward.</p>
+<p><strong>Determinants of demand:</strong> Price of the good, income of consumer, prices of related goods (substitutes and complements), tastes and preferences, expectations, number of buyers.</p>
+<p><strong>Law of Supply:</strong> As price increases, quantity supplied increases (direct relationship). Supply curve slopes upward.</p>
+
+<div class="highlight-box">
+<h4>Price Elasticity of Demand (PED)</h4>
+<p>PED = % change in quantity demanded / % change in price. If PED &gt; 1: elastic (luxury goods); PED &lt; 1: inelastic (necessities); PED = 1: unitary elastic; PED = 0: perfectly inelastic; PED = ∞: perfectly elastic</p>
+</div>
+
+<h3>Market Structures</h3>
+<div class="keypoint-grid">
+<div class="keypoint"><div class="keypoint-title">Perfect Competition</div><div class="keypoint-val">Many buyers/sellers, homogeneous products, free entry/exit, perfect information. Price = MC in long run</div></div>
+<div class="keypoint"><div class="keypoint-title">Monopoly</div><div class="keypoint-val">Single seller; barriers to entry; price maker; no close substitutes; examples: NTPC, Railways</div></div>
+<div class="keypoint"><div class="keypoint-title">Oligopoly</div><div class="keypoint-val">Few firms; interdependence; price rigidity; game theory applies; examples: telecom, aviation</div></div>
+<div class="keypoint"><div class="keypoint-title">Monopolistic Competition</div><div class="keypoint-val">Many firms; differentiated products; some price-making power; normal profit in long run; examples: restaurants, clothing</div></div>
+</div>
+
+<h2>National Income Concepts</h2>
+
+<h3>GDP & Related Measures</h3>
+<ul>
+<li><strong>GDP (Gross Domestic Product):</strong> Total market value of all final goods and services produced within a country's borders in a given period. Includes output by foreign residents; excludes output by nationals abroad.</li>
+<li><strong>GNP (Gross National Product):</strong> GDP + Net Factor Income from Abroad (NFIA). Includes output by nationals anywhere; excludes output by foreigners in India.</li>
+<li><strong>NNP (Net National Product):</strong> GNP – Depreciation (Capital Consumption)</li>
+<li><strong>NNP at Factor Cost = National Income</strong></li>
+</ul>
+
+<div class="formula">GNP = GDP + NFIA
+NNP = GNP – Depreciation
+National Income (NI) = NNP at Factor Cost = NNP at Market Price – Net Indirect Taxes
+Per Capita Income = National Income / Population</div>
+
+<h3>GDP Measurement Methods</h3>
+<ul>
+<li><strong>Expenditure Method:</strong> GDP = C + I + G + (X-M) where C=consumption, I=investment, G=government spending, X=exports, M=imports</li>
+<li><strong>Income Method:</strong> Sum of all incomes earned — wages, rent, profit, interest</li>
+<li><strong>Value Added Method (Production Method):</strong> Sum of value added at each stage of production</li>
+</ul>
+
+<h2>Indian Economy: Overview</h2>
+<p>India has the <strong>5th largest economy</strong> by nominal GDP and the <strong>3rd largest by PPP</strong> (as of 2024). Key features:</p>
+<ul>
+<li><strong>Mixed economy:</strong> Combines state intervention and market forces</li>
+<li><strong>Service-dominated:</strong> Services contribute ~55% of GDP; industry ~26%; agriculture ~18%</li>
+<li><strong>Demographics:</strong> ~1.4 billion people; median age ~28 years; demographic dividend advantage</li>
+<li><strong>Growth trajectory:</strong> 7%+ growth rate (one of fastest-growing major economies)</li>
+</ul>
+
+<h2>Economic Reforms — 1991 Liberalization</h2>
+<p>India faced a severe Balance of Payments crisis in 1991 (foreign exchange reserves down to ~2 weeks of imports). PM Narasimha Rao and Finance Minister Dr. Manmohan Singh initiated structural reforms:</p>
+<ul>
+<li><strong>Liberalization:</strong> Reduction in industrial licensing, deregulation, ease of entry</li>
+<li><strong>Privatization:</strong> Disinvestment of public sector enterprises</li>
+<li><strong>Globalization:</strong> Reduction of trade barriers, opening to foreign investment (FDI/FII)</li>
+</ul>
+
+<div class="upsc-tip">UPSC tests: GDP vs GNP vs NNP; methods of measuring GDP; types of markets; elasticity of demand; India's economic structure; 1991 reforms background and measures. Also remember: India's GDP base year is currently 2011-12 (revision pending to 2022-23).</div>
+`
+},
+
+'banking-india': {
+  tag: 'Basic Economics',
+  title: 'Banking in India',
+  read: '22 min read',
+  importance: 'High – Prelims & Mains GS-III',
+  body: `
+<h2>Structure of Banking in India</h2>
+<p>India has a <strong>two-tier banking structure</strong>: (1) Central Bank — the <strong>Reserve Bank of India (RBI)</strong>, and (2) Commercial Banks.</p>
+
+<h2>Reserve Bank of India (RBI)</h2>
+<p>RBI was established in <strong>1935</strong> under the RBI Act 1934, nationalized in <strong>1949</strong>. Headquarters: Mumbai.</p>
+
+<h3>Functions of RBI</h3>
+<ul>
+<li><strong>Monetary authority:</strong> Controls money supply and credit; issues currency (sole note-issuing authority except for Rs.1 coin & note — issued by Ministry of Finance)</li>
+<li><strong>Banker's bank:</strong> Holds CRR/SLR deposits of commercial banks; lender of last resort</li>
+<li><strong>Government's banker:</strong> Manages government's accounts, debt, and foreign exchange reserves</li>
+<li><strong>Custodian of foreign exchange:</strong> Manages India's forex reserves under FEMA 1999</li>
+<li><strong>Regulator and supervisor:</strong> Of commercial banks, NBFCs, cooperative banks</li>
+<li><strong>Developmental role:</strong> Financial inclusion, priority sector lending norms</li>
+</ul>
+
+<h3>Key Monetary Policy Instruments</h3>
+<div class="keypoint-grid">
+<div class="keypoint"><div class="keypoint-title">Repo Rate</div><div class="keypoint-val">Rate at which RBI lends to commercial banks (short-term, against G-secs). Key policy rate. Higher repo = dearer credit = less inflation</div></div>
+<div class="keypoint"><div class="keypoint-title">Reverse Repo Rate</div><div class="keypoint-val">Rate at which RBI borrows from commercial banks. Used to absorb excess liquidity. Always lower than repo rate (by 25 bps)</div></div>
+<div class="keypoint"><div class="keypoint-title">CRR (Cash Reserve Ratio)</div><div class="keypoint-val">% of net demand & time liabilities (NDTL) banks must keep as cash with RBI. Currently ~4%. No interest paid by RBI</div></div>
+<div class="keypoint"><div class="keypoint-title">SLR (Statutory Liquidity Ratio)</div><div class="keypoint-val">% of NDTL banks must maintain in liquid assets (cash, gold, govt securities). Currently ~18%. Used to control credit expansion</div></div>
+<div class="keypoint"><div class="keypoint-title">Bank Rate</div><div class="keypoint-val">Rate at which RBI rediscounts bills of exchange and government securities. Older instrument; now aligned to MSF rate</div></div>
+<div class="keypoint"><div class="keypoint-title">MSF (Marginal Standing Facility)</div><div class="keypoint-val">Emergency overnight liquidity window for banks; rate = Repo + 25 bps; banks can borrow against G-secs even beyond SLR</div></div>
+<div class="keypoint"><div class="keypoint-title">OMO (Open Market Operations)</div><div class="keypoint-val">RBI buys/sells government securities in open market to inject/absorb liquidity; powerful tool for managing money supply</div></div>
+<div class="keypoint"><div class="keypoint-title">LAF (Liquidity Adjustment Facility)</div><div class="keypoint-val">Framework for daily liquidity management; repo and reverse repo are its instruments; corridor approach</div></div>
+</div>
+
+<h2>Types of Banks in India</h2>
+<ul>
+<li><strong>Scheduled Commercial Banks:</strong> Listed in 2nd Schedule of RBI Act; divided into: Public Sector Banks (PSBs), Private Sector Banks, Foreign Banks, Regional Rural Banks (RRBs), Small Finance Banks, Payments Banks</li>
+<li><strong>Public Sector Banks (PSBs):</strong> Government owns >50% stake; nationalized banks (14 in 1969, 6 in 1980); currently 12 PSBs after mergers</li>
+<li><strong>Regional Rural Banks (RRBs):</strong> Set up under RRB Act 1976; joint ownership — 50% Centre, 15% State, 35% sponsor bank; serve rural areas</li>
+<li><strong>Cooperative Banks:</strong> Under dual control of RBI (banking) and State Governments (cooperative law); serve agricultural and rural credit needs</li>
+<li><strong>Small Finance Banks:</strong> Set up from 2016; serve unserved and underserved sections; 75% of credit to priority sectors</li>
+<li><strong>Payments Banks:</strong> New model (2016); can receive deposits up to Rs.2 lakh per customer; no lending; focus on payments and remittances; examples: Airtel Payments Bank, India Post Payments Bank</li>
+</ul>
+
+<h2>Priority Sector Lending (PSL)</h2>
+<p>RBI mandates all scheduled commercial banks to lend to priority sectors:</p>
+<ul>
+<li><strong>40% of ANBC</strong> (Adjusted Net Bank Credit) for domestic banks</li>
+<li>Agriculture: 18%; Weaker sections: 10%; Micro enterprises, Education, Housing, Renewable energy, Social infrastructure also included</li>
+<li>Foreign banks with <20 branches: 40% PSL; with ≥20 branches: same as domestic banks</li>
+</ul>
+
+<h2>Non-Performing Assets (NPA) Crisis</h2>
+<p>NPAs are loans where repayment has not been received for more than <strong>90 days</strong>. India's banking sector faced a massive NPA crisis (2015–2020), particularly in PSBs, due to reckless lending to infrastructure and real estate. Key measures:</p>
+<ul>
+<li><strong>Insolvency and Bankruptcy Code (IBC) 2016:</strong> Time-bound resolution of stressed assets (180 days + 90 days extension)</li>
+<li><strong>Bad Bank (NARCL):</strong> National Asset Reconstruction Company Ltd — government-backed entity to acquire stressed assets from PSBs</li>
+<li><strong>SARFAESI Act 2002:</strong> Banks can enforce security and recover dues without court intervention</li>
+<li><strong>Asset Quality Review (AQR):</strong> RBI's exercise to bring out hidden NPAs onto banks' books</li>
+</ul>
+
+<div class="upsc-tip">UPSC tests: Repo vs reverse repo; CRR vs SLR differences; RBI's functions; types of banks; PSL norms; NPA resolution mechanisms (IBC, SARFAESI, ARC). Also: Know that NABARD is apex body for agricultural credit; SIDBI for small industries; NHB for housing finance; EXIM Bank for international trade.</div>
+`
+},
+
+'inflation': {
+  tag: 'Basic Economics',
+  title: 'Inflation',
+  read: '18 min read',
+  importance: 'Very High – Prelims & Mains GS-III',
+  body: `
+<h2>What is Inflation?</h2>
+<p>Inflation is the <strong>sustained rise in the general price level</strong> of goods and services over time, resulting in a decline in the purchasing power of money. It is measured using price indices.</p>
+
+<h2>Types of Inflation</h2>
+
+<h3>Based on Rate</h3>
+<ul>
+<li><strong>Creeping/Low inflation:</strong> 1–3% annually; mild; considered healthy for a growing economy</li>
+<li><strong>Walking/Moderate inflation:</strong> 3–10%; can reduce growth; policy intervention needed</li>
+<li><strong>Running inflation:</strong> 10–20%; harmful; erodes purchasing power rapidly</li>
+<li><strong>Galloping/Hyper inflation:</strong> >50% monthly; catastrophic (e.g., Zimbabwe 2008, Germany 1923)</li>
+<li><strong>Stagflation:</strong> Inflation + stagnant growth + high unemployment (worst combination; e.g., USA 1970s)</li>
+<li><strong>Deflation:</strong> Falling price levels; dangerous (debt deflation spiral); Japan's "lost decade"</li>
+<li><strong>Disinflation:</strong> Declining <em>rate</em> of inflation (still positive but slowing)</li>
+</ul>
+
+<h3>Based on Cause</h3>
+<ul>
+<li><strong>Demand-Pull Inflation:</strong> "Too much money chasing too few goods" — excess demand. Solutions: reduce government spending, raise taxes, tighter monetary policy</li>
+<li><strong>Cost-Push Inflation:</strong> Rising production costs (wages, raw materials, energy) push up prices. Example: oil price shocks. Also called "stagflationary" when combined with supply shock</li>
+<li><strong>Structural Inflation:</strong> Caused by structural inefficiencies in the economy — poor supply chains, lack of competition, rigid labor markets</li>
+<li><strong>Imported Inflation:</strong> Rise in prices of imported goods (e.g., crude oil) driving domestic inflation</li>
+<li><strong>Built-in/Wage-Price Spiral:</strong> Workers demand higher wages due to past inflation; firms raise prices to cover costs; cycle repeats</li>
+</ul>
+
+<h2>Measurement of Inflation in India</h2>
+
+<table class="info-table">
+<tr><th>Index</th><th>Full Form</th><th>Base Year</th><th>Published by</th><th>Coverage</th></tr>
+<tr><td><strong>CPI</strong></td><td>Consumer Price Index</td><td>2012</td><td>NSO (MoSPI)</td><td>Retail prices; 4 sub-indices: Rural, Urban, Industrial Workers (IW), Agricultural Labourers (AL)</td></tr>
+<tr><td><strong>WPI</strong></td><td>Wholesale Price Index</td><td>2011-12</td><td>DPIIT (Ministry of Commerce)</td><td>Wholesale/producer prices; 697 commodities; does not include services</td></tr>
+<tr><td><strong>PPI</strong></td><td>Producer Price Index</td><td>Being developed</td><td>To replace WPI</td><td>Measures price change from producer's perspective</td></tr>
+<tr><td><strong>GDP Deflator</strong></td><td>—</td><td>2011-12</td><td>NSO</td><td>Broadest measure; includes all goods and services in GDP</td></tr>
+</table>
+
+<div class="highlight-box blue">
+<h4>RBI's Inflation Target (Flexible Inflation Targeting)</h4>
+<p>RBI uses <strong>CPI (Combined) as the headline inflation target</strong>. The Monetary Policy Framework Agreement (2015) set the target at <strong>4% ± 2%</strong> (band: 2%–6%). The 6-member Monetary Policy Committee (MPC) — 3 RBI + 3 external — decides the repo rate to achieve this target. RBI must report to government if inflation stays outside band for 3 consecutive quarters.</p>
+</div>
+
+<h2>Effects of Inflation</h2>
+<ul>
+<li><strong>Debtors benefit, creditors lose</strong> (real value of debt falls)</li>
+<li>Fixed income earners (pensioners, salaried) lose</li>
+<li>Businessmen/borrowers benefit (assets appreciate)</li>
+<li>Redistribution of income from poor to rich (Cantillon effect)</li>
+<li>Erodes savings; discourages long-term investment</li>
+<li><strong>Menu costs</strong> and <strong>shoe-leather costs</strong> of inflation</li>
+</ul>
+
+<h2>Control of Inflation</h2>
+<ul>
+<li><strong>Monetary policy:</strong> Raise interest rates (repo rate); increase CRR/SLR; OMOs (sell govt. securities)</li>
+<li><strong>Fiscal policy:</strong> Reduce government expenditure; raise taxes (reduce disposable income)</li>
+<li><strong>Supply-side measures:</strong> Increase agricultural/industrial production; reduce bottlenecks; ease imports; release buffer stocks</li>
+<li><strong>Administrative measures:</strong> Price controls (rarely effective long-term); anti-hoarding measures; Essential Commodities Act</li>
+</ul>
+
+<h2>Core vs Headline Inflation</h2>
+<ul>
+<li><strong>Headline inflation:</strong> Total inflation including all items (food, fuel, core)</li>
+<li><strong>Core inflation:</strong> Headline minus food and fuel — more stable; better indicator of underlying demand pressures; guides monetary policy</li>
+</ul>
+
+<div class="upsc-tip">UPSC tests: CPI vs WPI; RBI's inflation target; demand-pull vs cost-push; effects of inflation on different groups; stagflation; base effects in inflation data; food inflation and its causes in India (supply constraints, MSP increases, logistics).</div>
+`
+},
+
+'physical-features': {
+  tag: 'Indian Geography',
+  title: 'Physical Features of India',
+  read: '22 min read',
+  importance: 'High – Prelims & Mains GS-I',
+  body: `
+<h2>Introduction</h2>
+<p>India displays <strong>remarkable physiographic diversity</strong> — from the young fold mountains of the Himalayas in the north to the ancient crystalline rocks of the Deccan Plateau, from vast alluvial plains to coastal plains, islands, and deserts. This variety shapes climate, drainage, soils, agriculture, and human settlement patterns.</p>
+
+<h2>Major Physiographic Divisions</h2>
+
+<h3>1. The Himalayan Mountains</h3>
+<p>The Himalayas are <strong>young fold mountains</strong> formed by the collision of the Indian and Eurasian tectonic plates (Cenozoic era, ~50 million years ago). They are still rising. The Himalayas run for about <strong>2,400 km</strong> from the Indus gorge (west) to the Brahmaputra gorge (east), with an average width of 400 km.</p>
+
+<div class="keypoint-grid">
+<div class="keypoint"><div class="keypoint-title">Greater Himalayas (Himadri)</div><div class="keypoint-val">Northernmost/main range; highest peaks including Everest (8,849m), K2 (8,611m), Kangchenjunga (8,586m — highest in India); average elevation 6,100m; perennial glaciers</div></div>
+<div class="keypoint"><div class="keypoint-title">Lesser Himalayas (Himachal)</div><div class="keypoint-val">South of Himadri; Pir Panjal, Dhauladhar, Mahabharat ranges; hill stations (Shimla, Mussoorie, Nainital, Darjeeling)</div></div>
+<div class="keypoint"><div class="keypoint-title">Outer Himalayas (Shiwaliks)</div><div class="keypoint-val">Southernmost; formed last (~7 mya); foothill zone; Doon Valley between Shiwaliks and Lesser Himalayas; Terai wetlands south of Shiwaliks</div></div>
+<div class="keypoint"><div class="keypoint-title">Trans-Himalaya</div><div class="keypoint-val">North of Greater Himalayas; Karakoram, Ladakh ranges; rain shadow; cold desert; Aksai Chin</div></div>
+</div>
+
+<h4>Regional Divisions of Himalayas</h4>
+<ul>
+<li><strong>Punjab Himalayas (Indus–Satluj):</strong> Himachal Pradesh and J&K</li>
+<li><strong>Kumaon Himalayas (Satluj–Kali):</strong> Uttarakhand; Nanda Devi (7816m — highest peak entirely within India)</li>
+<li><strong>Nepal Himalayas (Kali–Tista):</strong> Broadest section; Mount Everest</li>
+<li><strong>Assam Himalayas (Tista–Dihang):</strong> Narrowest section; Namcha Barwa (7756m) near the great bend</li>
+</ul>
+
+<h3>2. The Northern Plains</h3>
+<p>The <strong>Great Indian Plains</strong> (Indo-Gangetic-Brahmaputra Plains) stretch about <strong>3,200 km</strong> east-west and 240–320 km north-south. Formed by alluvial deposits of the Indus, Ganga, and Brahmaputra river systems. One of the world's most extensive and fertile plains.</p>
+
+<div class="timeline">
+<div class="timeline-item"><div class="timeline-year">Bhabar</div><div class="timeline-text">Narrow belt (8–16 km) at the foot of the Shiwaliks; porous, permeable rocks; streams disappear underground; forests</div></div>
+<div class="timeline-item"><div class="timeline-year">Terai</div><div class="timeline-text">Below Bhabar; underground streams re-emerge; marshy, swampy zone; dense forests; cleared and cultivated now</div></div>
+<div class="timeline-item"><div class="timeline-year">Bhangar</div><div class="timeline-text">Old alluvium; older floodplain; slightly elevated tableland; Kankar (impure calcium carbonate) nodules</div></div>
+<div class="timeline-item"><div class="timeline-year">Khadar</div><div class="timeline-text">New alluvium; flood plains, renewed annually by floods; highly fertile; lower level</div></div>
+</div>
+
+<h3>3. The Peninsular Plateau</h3>
+<p>The oldest landmass of India (Gondwana continent origin); composed of ancient crystalline, igneous, and metamorphic rocks. Generally flat with gentle slopes; gentle ridges and broad shallow valleys. Divided by the <strong>Narmada-Son fault</strong> into:</p>
+<ul>
+<li><strong>Central Highlands:</strong> North of Narmada; Malwa Plateau, Vindhya, Aravallis, Bundelkhand, Baghelkhand</li>
+<li><strong>Deccan Plateau:</strong> South of Narmada; <em>Triangular shape</em>; higher in west, slopes east; Western Ghats = western boundary; Eastern Ghats = eastern boundary</li>
+</ul>
+
+<h4>Deccan Traps</h4>
+<p>Large lava plateau (northwest Deccan); formed by volcanic outpourings 65 million years ago (linked to Chicxulub impact); forms black/regur soil (cotton soil) of Maharashtra, Gujarat, MP — highly fertile.</p>
+
+<h3>4. The Indian Desert (Thar Desert)</h3>
+<p>Located in western Rajasthan; extends into Pakistan (Thar/Rajputana Desert). Sandy and rocky terrain; sparse vegetation; extreme temperatures; very low and erratic rainfall (&lt;150mm). Important for:
+<ul>
+<li>Wind energy potential</li>
+<li>Indira Gandhi Canal brings irrigation</li>
+<li>Luni River — only major river in the region</li>
+</ul>
+
+<h3>5. The Coastal Plains</h3>
+<table class="info-table">
+<tr><th>Feature</th><th>Western Coastal Plain</th><th>Eastern Coastal Plain</th></tr>
+<tr><td>Width</td><td>Narrow (10–15 km)</td><td>Wider (100–120 km)</td></tr>
+<tr><td>Nature</td><td>Rocky, indented; natural harbours</td><td>Sandy, smooth; less indented</td></tr>
+<tr><td>Rivers</td><td>Short, fast-flowing; no deltas</td><td>Long, slow; form large deltas</td></tr>
+<tr><td>Features</td><td>Konkan, Kanara, Malabar Coasts; backwaters (Kerala)</td><td>Coromandel (Tamil Nadu), Andhra; Krishna, Godavari, Mahanadi deltas; Chilika lake</td></tr>
+<tr><td>Major ports</td><td>Mumbai, Goa, Kochi</td><td>Chennai, Visakhapatnam, Kolkata</td></tr>
+</table>
+
+<h3>6. Islands</h3>
+<ul>
+<li><strong>Lakshadweep Islands:</strong> Arabian Sea; coral islands; 36 islands; only Union Territory fully surrounded by sea; 10 degrees channel separates from Maldives</li>
+<li><strong>Andaman & Nicobar Islands:</strong> Bay of Bengal; 572 islands (248 inhabited); volcanic origin; Duncan Passage separates Andaman from Nicobar; Barren Island (only active volcano in South Asia); Ten Degree Channel separates Andaman from Nicobar</li>
+</ul>
+
+<div class="upsc-tip">UPSC tests: Heights of major peaks; physiographic zones of northern plains (Bhabar, Terai, Bhangar, Khadar); Western vs Eastern Ghats; Deccan Traps and black soil formation; island geography; east-flowing vs west-flowing rivers. Note: Western Ghats = higher, continuous; Eastern Ghats = discontinuous, lower.</div>
+`
+},
+
+'climate': {
+  tag: 'Indian Geography',
+  title: 'Climate Profile of India',
+  read: '20 min read',
+  importance: 'High – Prelims & Mains GS-I',
+  body: `
+<h2>Factors Influencing India's Climate</h2>
+<ul>
+<li><strong>Latitudinal location:</strong> Lies between 8°N–37°N; tropics to subtropics</li>
+<li><strong>Himalayan barrier:</strong> Blocks cold Central Asian winds; traps monsoon moisture</li>
+<li><strong>Proximity to ocean:</strong> Moderating influence of Arabian Sea and Bay of Bengal</li>
+<li><strong>Monsoon winds:</strong> Dominant climate control mechanism</li>
+<li><strong>Altitude:</strong> Deccan Peninsula, Thar Desert create local climatic variations</li>
+</ul>
+
+<h2>India's Climate Type</h2>
+<p>India has a <strong>monsoon-dominated climate</strong>. Köppen classification: tropical monsoon (Am), tropical wet and dry (Aw), semi-arid (BSh), arid (BWh), and highland (H) in parts. India is in the <strong>South Asian Monsoon</strong> domain.</p>
+
+<h2>The Monsoon Mechanism</h2>
+<p>The term "monsoon" comes from Arabic <em>mausim</em> (season). Classical theory: differential heating of land and sea creates pressure gradient driving monsoon. Modern understanding also involves:</p>
+
+<ul>
+<li><strong>Jet Streams:</strong> Sub-tropical jet stream (STJS) over Himalayas in winter keeps cold conditions; easterly jet stream in summer helps onset of monsoon</li>
+<li><strong>ITCZ (Inter-Tropical Convergence Zone):</strong> Shifts northward in summer; drives SW monsoon</li>
+<li><strong>ENSO (El Niño-Southern Oscillation):</strong> El Niño (warming of eastern Pacific) typically reduces Indian monsoon rainfall; La Niña enhances it</li>
+<li><strong>Tibetan Plateau:</strong> Heats up in summer; acts as elevated heat source; drives upper level divergence enhancing monsoon</li>
+</ul>
+
+<h2>The Four Seasons of India</h2>
+
+<h3>1. Winter (December–February)</h3>
+<ul>
+<li>Northeast trade winds blow from land to sea</li>
+<li>Cold weather; western disturbances (cyclonic storms from Mediterranean) bring rain to NW India — important for <em>rabi</em> crops</li>
+<li>Cold wave conditions in North India; Tamil Nadu gets rain from retreating monsoon (Oct–Dec)</li>
+</ul>
+
+<h3>2. Hot Weather/Summer (March–May)</h3>
+<ul>
+<li>Temperature rises; heat lows form over Rajasthan and Punjab</li>
+<li><strong>Loo:</strong> Hot, dry winds in North India (UP, Punjab, Haryana)</li>
+<li><strong>Dust storms</strong> in Rajasthan</li>
+<li><strong>Norwesters/Kalbaisakhi:</strong> Violent pre-monsoon storms in Bengal and Assam; helpful for <em>jute</em> and <em>rice</em> cultivation</li>
+<li><strong>Mango showers:</strong> Pre-monsoon showers in Kerala and Karnataka</li>
+</ul>
+
+<h3>3. Southwest Monsoon (June–September)</h3>
+<p>India receives about <strong>75–90% of its annual rainfall</strong> during the SW monsoon season. The monsoon arrives over <strong>Kerala by June 1</strong> (on average) and withdraws from northwest by <strong>September 1</strong>.</p>
+
+<div class="timeline">
+<div class="timeline-item"><div class="timeline-year">Two Branches</div><div class="timeline-text"><strong>Arabian Sea Branch:</strong> Hits Western Ghats first; heavy rainfall on windward (western) side; rain shadow to the east (Deccan interior). <strong>Bay of Bengal Branch:</strong> Moves up northeast India; turns west along Ganga plains. Cherrapunji (Mawsynram) receives rainfall from both branches — world's highest rainfall</div></div>
+<div class="timeline-item"><div class="timeline-year">Rain Distribution</div><div class="timeline-text">Western Ghats (300–400 cm), Northeast (200+ cm), Ganga plains (75–150 cm), Rajasthan (&lt;25 cm), Leh (5–10 cm)</div></div>
+</div>
+
+<h3>4. Retreating Monsoon / Post-Monsoon (October–November)</h3>
+<ul>
+<li>Monsoon withdraws from northwest; ITCZ moves south</li>
+<li><strong>Bay of Bengal cyclones</strong> form; hit Andhra Pradesh and Tamil Nadu coasts</li>
+<li>Tamil Nadu gets most of its rain during this period (Northeast monsoon/Retreating monsoon)</li>
+</ul>
+
+<h2>Climatic Regions of India</h2>
+<ul>
+<li><strong>Tropical Rain Forest:</strong> Western coastal strip south of Mumbai, NE India; &gt;200 cm rainfall</li>
+<li><strong>Tropical Savanna:</strong> Most of peninsula (Peninsular India); dry winters</li>
+<li><strong>Semi-arid:</strong> Deccan interior; dry but not desert</li>
+<li><strong>Tropical Desert:</strong> Rajasthan (Thar); &lt;30 cm; extreme temperatures</li>
+<li><strong>Humid Subtropical:</strong> Gangetic plains; hot summers, cool winters, moderate rain</li>
+<li><strong>Mountain Climate:</strong> Himalayas; varies with altitude</li>
+</ul>
+
+<div class="upsc-tip">UPSC tests: El Niño effects on Indian monsoon; Western disturbances; Loo and Kalbaisakhi; branches of SW monsoon; Tamil Nadu's rain from retreating monsoon; reasons for extreme rainfall variability; highest rainfall station (Mawsynram, Meghalaya, ~11,872 mm average).</div>
+`
+},
+
+'ecology-basics': {
+  tag: 'Environment & Ecology',
+  title: 'Ecology Basics',
+  read: '18 min read',
+  importance: 'High – Prelims & Mains GS-III',
+  body: `
+<h2>Ecology: Fundamental Concepts</h2>
+<p>Ecology is the scientific study of interactions among organisms and between organisms and their environment. The term was coined by <strong>Ernst Haeckel</strong> in 1866. Ecology operates at multiple levels: organism, population, community, ecosystem, and biosphere.</p>
+
+<h2>Key Ecological Concepts</h2>
+
+<h3>Ecosystem</h3>
+<p>An ecosystem is a <strong>functional unit of nature</strong> — a complex of organisms and their physical environment interacting as a system. Components:</p>
+<ul>
+<li><strong>Abiotic components:</strong> Solar energy, temperature, humidity, precipitation, soil, wind, minerals</li>
+<li><strong>Biotic components:</strong> Producers (autotrophs), Consumers (heterotrophs — primary, secondary, tertiary), Decomposers (saprotrophs)</li>
+</ul>
+
+<h3>Food Chain & Food Web</h3>
+<p>A <strong>food chain</strong> is a linear sequence of energy transfer: Plants → Herbivores → Carnivores → Top predators → Decomposers. A <strong>food web</strong> is a complex network of interconnected food chains. Food webs are more realistic and resilient than simple food chains.</p>
+
+<h3>Ecological Pyramids</h3>
+<p>Graphical representations of trophic levels in an ecosystem:</p>
+<ul>
+<li><strong>Pyramid of Numbers:</strong> Always upright in grassland; inverted in forest (one tree supports many insects); spindle-shaped in parasitic chains</li>
+<li><strong>Pyramid of Biomass:</strong> Generally upright on land; inverted in aquatic ecosystems (phytoplankton biomass less than zooplankton at a given time)</li>
+<li><strong>Pyramid of Energy:</strong> <em>Always upright</em>; total energy decreases at each trophic level; follows 10% law (Lindeman's efficiency)</li>
+</ul>
+
+<div class="formula">10% Law (Lindeman, 1942):
+Only about 10% of energy at each trophic level is transferred to the next.
+If primary producers fix 10,000 kcal:
+• Primary consumers receive 1,000 kcal
+• Secondary consumers receive 100 kcal
+• Tertiary consumers receive 10 kcal</div>
+
+<h3>Biogeochemical Cycles</h3>
+<ul>
+<li><strong>Carbon Cycle:</strong> Carbon moves through photosynthesis, respiration, decomposition, fossil fuel combustion; anthropogenic CO₂ disrupting the cycle</li>
+<li><strong>Nitrogen Cycle:</strong> Nitrogen fixation (Rhizobium, Azobacter, lightning) → Nitrification → Assimilation → Ammonification → Denitrification</li>
+<li><strong>Phosphorus Cycle:</strong> Sedimentary cycle (no gaseous phase); weathering → uptake by plants → decomposition → back to soil</li>
+<li><strong>Water Cycle:</strong> Evaporation, transpiration, precipitation, runoff, infiltration, groundwater recharge</li>
+</ul>
+
+<h3>Ecological Succession</h3>
+<p>The directional, predictable change in the species composition of a community over time. Types:</p>
+<ul>
+<li><strong>Primary succession:</strong> On bare, lifeless substrate (lava flows, glacial retreat); very slow; pioneer species (lichens, mosses) start the process</li>
+<li><strong>Secondary succession:</strong> On previously colonized but disturbed land (after fire, farming); faster; soil and seeds already present</li>
+<li><strong>Climax community:</strong> The stable, self-sustaining end-stage of succession; dominated by the tallest, longest-lived trees possible for the climate</li>
+</ul>
+
+<h3>Ecological Niches & Biodiversity</h3>
+<p>A <strong>niche</strong> is the total functional role of a species in the ecosystem — not just its habitat but all its interactions, behaviors, and requirements. Competitive exclusion principle (Gause): Two species cannot occupy exactly the same niche indefinitely in the same habitat.</p>
+
+<h2>Biomes of India</h2>
+<div class="keypoint-grid">
+<div class="keypoint"><div class="keypoint-title">Tropical Rainforest</div><div class="keypoint-val">Western Ghats, Andaman & Nicobar, NE India; high biodiversity; multi-layered canopy</div></div>
+<div class="keypoint"><div class="keypoint-title">Tropical Deciduous</div><div class="keypoint-val">Most of peninsular India; Sal, Teak dominant; two types: moist (>100cm) and dry (<100cm)</div></div>
+<div class="keypoint"><div class="keypoint-title">Tropical Thorn Forest</div><div class="keypoint-val">Rajasthan, Gujarat, Punjab; &lt;50cm rain; Khejri (State tree of Rajasthan), acacia, euphorbias</div></div>
+<div class="keypoint"><div class="keypoint-title">Montane/Alpine</div><div class="keypoint-val">Himalayas; altitudinal zonation: tropical→subtropical→temperate→alpine→nival</div></div>
+<div class="keypoint"><div class="keypoint-title">Mangroves</div><div class="keypoint-val">Coastal intertidal zone; Sundarbans (largest mangrove in world); salt-tolerant; pneumatophores; nursery for fish</div></div>
+</div>
+
+<div class="upsc-tip">UPSC ecology questions focus on: food web vs food chain; energy pyramid (always upright); ecological succession; nitrogen cycle steps (often asked which organism performs which step); biomes; mangrove ecology; keystone species concept.</div>
+`
+},
+
+'biodiversity': {
+  tag: 'Environment & Ecology',
+  title: 'Biodiversity',
+  read: '20 min read',
+  importance: 'Very High – Prelims & Mains GS-III',
+  body: `
+<h2>What is Biodiversity?</h2>
+<p>Biodiversity refers to the <strong>variety of life on Earth</strong> — from the genetic makeup of individual organisms to the diversity of species and the array of ecosystems they form. The term was popularized by E.O. Wilson in 1986. It has three levels:</p>
+<ul>
+<li><strong>Genetic diversity:</strong> Variation within a species (different cultivars of rice, different breeds of cattle)</li>
+<li><strong>Species diversity:</strong> Variety of species in a region (species richness, species evenness)</li>
+<li><strong>Ecosystem diversity:</strong> Variety of habitats, communities, and ecological processes (wetlands, forests, grasslands, coral reefs)</li>
+</ul>
+
+<h2>Biodiversity Hotspots</h2>
+<p>A biodiversity hotspot must have at least <strong>1,500 endemic vascular plant species</strong> and must have lost at least <strong>70% of its original habitat</strong>. Defined by <strong>Norman Myers</strong> (1988). Currently <strong>36 hotspots</strong> globally.</p>
+
+<p><strong>India has 4 biodiversity hotspots:</strong></p>
+<div class="keypoint-grid">
+<div class="keypoint"><div class="keypoint-title">Western Ghats & Sri Lanka</div><div class="keypoint-val">High endemic flora and fauna; shared with Sri Lanka; includes Nilgiris, Agasthyamalai; Lion-tailed macaque, Nilgiri tahr</div></div>
+<div class="keypoint"><div class="keypoint-title">Himalaya (Eastern)</div><div class="keypoint-val">Eastern Himalayas including NE India, Bhutan, Nepal; Snow leopard, Red panda, Takin</div></div>
+<div class="keypoint"><div class="keypoint-title">Indo-Burma</div><div class="keypoint-val">Includes NE India, Myanmar, parts of SE Asia; highly threatened; freshwater turtles, river dolphins</div></div>
+<div class="keypoint"><div class="keypoint-title">Sundaland</div><div class="keypoint-val">SE Asia; includes Andaman & Nicobar Islands; Orangutan, Rafflesia</div></div>
+</div>
+
+<h2>India's Biodiversity Status</h2>
+<p>India is one of the world's <strong>17 mega-diverse countries</strong> (as defined by IUCN/CI). Though it occupies only 2.4% of world's land area, it supports about 7–8% of all recorded species. India has:</p>
+<ul>
+<li>~47,000 plant species (12.6% of world flora)</li>
+<li>~89,000 animal species (7.1% of world fauna)</li>
+<li>~6.2% of reptiles, 6.2% of amphibians</li>
+<li>~12.6% of birds</li>
+</ul>
+
+<h2>IUCN Red List Categories</h2>
+<table class="info-table">
+<tr><th>Category</th><th>Abbr.</th><th>Description</th><th>Indian Example</th></tr>
+<tr><td>Extinct</td><td>EX</td><td>No surviving individuals</td><td>Cheetah (locally extinct in 1952; reintroduced 2022)</td></tr>
+<tr><td>Extinct in Wild</td><td>EW</td><td>Survives only in captivity</td><td>Namdapha flying squirrel</td></tr>
+<tr><td>Critically Endangered</td><td>CR</td><td>Extremely high risk of extinction</td><td>Great Indian Bustard, Ganges river dolphin, White-rumped vulture</td></tr>
+<tr><td>Endangered</td><td>EN</td><td>High risk of extinction</td><td>Snow Leopard (formerly; now Vulnerable), Tiger (formerly; now Vulnerable)</td></tr>
+<tr><td>Vulnerable</td><td>VU</td><td>High risk of becoming Endangered</td><td>Tiger, Snow Leopard, Indian Elephant</td></tr>
+<tr><td>Near Threatened</td><td>NT</td><td>Close to qualifying for threatened</td><td>Dhole (wild dog)</td></tr>
+<tr><td>Least Concern</td><td>LC</td><td>Not under significant threat</td><td>Common starling</td></tr>
+</table>
+
+<h2>Protected Area Network</h2>
+<ul>
+<li><strong>National Parks:</strong> Highest protection; no human activity; ~106 in India. First: Jim Corbett National Park (1936)</li>
+<li><strong>Wildlife Sanctuaries:</strong> Some human activities allowed; ~567 in India</li>
+<li><strong>Biosphere Reserves:</strong> UNESCO designation; three concentric zones (core/buffer/transition); 18 in India; 12 in UNESCO's World Network. First: Nilgiri (1986)</li>
+<li><strong>Conservation Reserves:</strong> Buffer zones near protected areas; local community involvement</li>
+<li><strong>Community Reserves:</strong> Community-managed conservation areas</li>
+</ul>
+
+<h2>CBD & Nagoya Protocol</h2>
+<ul>
+<li><strong>Convention on Biological Diversity (CBD, 1992):</strong> Three objectives: conservation of biodiversity, sustainable use, equitable benefit-sharing from genetic resources</li>
+<li><strong>Nagoya Protocol (2010):</strong> Protocol to CBD on Access and Benefit Sharing (ABS) from genetic resources; entered into force 2014</li>
+<li><strong>Cartagena Protocol on Biosafety (2000):</strong> Governing trade in Living Modified Organisms (LMOs)</li>
+<li><strong>Kunming-Montreal Global Biodiversity Framework (2022):</strong> "30×30" target — protect 30% of land and oceans by 2030</li>
+</ul>
+
+<div class="upsc-tip">UPSC tests: Biodiversity hotspots in India; IUCN categories with examples; Project Tiger vs Project Elephant; CBD, Cartagena, and Nagoya Protocol; biosphere reserve zones; ex-situ vs in-situ conservation (zoo vs wildlife sanctuary); keystone species; endemic vs endangered species differences.</div>
+`
+},
+
+'space-tech': {
+  tag: 'Science & Technology',
+  title: 'Space Technology (ISRO)',
+  read: '18 min read',
+  importance: 'Very High – Prelims & Mains GS-III',
+  body: `
+<h2>ISRO: Indian Space Research Organisation</h2>
+<p>ISRO was established in <strong>1969</strong>. Headquarters: Bengaluru. It operates under the Department of Space, directly under the Prime Minister. India became the <strong>4th country to have a space program</strong> capable of satellite launch and the <strong>1st Asian country to reach Mars orbit</strong> in its first attempt.</p>
+
+<h2>Major ISRO Missions</h2>
+
+<h3>Satellite Launch Vehicles</h3>
+<table class="info-table">
+<tr><th>Vehicle</th><th>Type</th><th>Payload Capacity</th><th>Status</th></tr>
+<tr><td><strong>PSLV</strong> (Polar Satellite Launch Vehicle)</td><td>4-stage (solid-liquid-solid-liquid)</td><td>1,750 kg (SSO), 3,800 kg (LEO)</td><td>Most reliable; 100% success after early failures</td></tr>
+<tr><td><strong>GSLV</strong> (Geosynchronous Satellite Launch Vehicle)</td><td>3-stage; uses cryogenic engine</td><td>2,500 kg (GTO)</td><td>Operational; cryogenic engine developed indigenously</td></tr>
+<tr><td><strong>GSLV Mk III / LVM3</strong></td><td>Heavy lift</td><td>4,000 kg (GTO), 10,000 kg (LEO)</td><td>Used for Chandrayaan-3, OneWeb satellites</td></tr>
+<tr><td><strong>SSLV</strong> (Small Satellite Launch Vehicle)</td><td>3-stage solid propellant</td><td>500 kg (LEO)</td><td>New; for small/mini/micro satellites</td></tr>
+</table>
+
+<h3>Landmark Missions</h3>
+<div class="timeline">
+<div class="timeline-item"><div class="timeline-year">Aryabhata (1975)</div><div class="timeline-text">India's first satellite; launched by USSR from Kapustin Yar; named after ancient Indian mathematician</div></div>
+<div class="timeline-item"><div class="timeline-year">SLV-3 (1980)</div><div class="timeline-text">India's first indigenous Satellite Launch Vehicle; placed Rohini satellite in orbit; managed by <strong>Dr. A.P.J. Abdul Kalam</strong></div></div>
+<div class="timeline-item"><div class="timeline-year">Chandrayaan-1 (2008)</div><div class="timeline-text">First Indian lunar mission; discovered water ice on the Moon (Moon Impact Probe); confirmed by MIP payload</div></div>
+<div class="timeline-item"><div class="timeline-year">Mangalyaan/MOM (2013)</div><div class="timeline-text">Mars Orbiter Mission; 1st Mars mission of Asia; 1st country to succeed on 1st attempt; reached Mars in 2014; budget: ~₹450 crore (less than Hollywood film Gravity)</div></div>
+<div class="timeline-item"><div class="timeline-year">Chandrayaan-2 (2019)</div><div class="timeline-text">Orbiter, lander Vikram, rover Pragyan; orbiter successful; lander crashed during soft landing. Orbiter still active</div></div>
+<div class="timeline-item"><div class="timeline-year">Chandrayaan-3 (2023)</div><div class="timeline-text"><strong>Successful soft landing near Moon's south pole</strong> (Aug 23, 2023); India = 4th country to soft-land on Moon; 1st to land near south pole; Pragyan rover confirmed sulfur in lunar soil</div></div>
+<div class="timeline-item"><div class="timeline-year">Aditya-L1 (2023)</div><div class="timeline-text">India's 1st solar mission; Lagrange Point 1 (L1) — ideal position to study Sun; successfully reached L1 orbit (Jan 2024)</div></div>
+<div class="timeline-item"><div class="timeline-year">Gaganyaan (planned 2025)</div><div class="timeline-text">India's 1st crewed spaceflight; 3 Vyomanauts; 400 km orbit; 3-day mission; currently in testing phase</div></div>
+</div>
+
+<h2>Indian Satellite Systems</h2>
+<ul>
+<li><strong>INSAT (Indian National Satellite System):</strong> Communication, meteorology, disaster warning; INSAT-3D/3DR for weather forecasting</li>
+<li><strong>IRS (Indian Remote Sensing):</strong> Earth observation; agriculture, land use, water resources, urban planning</li>
+<li><strong>NavIC (Navigation with Indian Constellation):</strong> India's indigenous navigation system; 7 satellites; covers India + 1,500 km around; accuracy ~20m (better in subcontinent than GPS)</li>
+<li><strong>GSAT series:</strong> Communication satellites in GEO orbit</li>
+<li><strong>RISAT (Radar Imaging Satellite):</strong> All-weather Earth observation; used for border surveillance and disaster management</li>
+</ul>
+
+<h2>Space Policy 2023</h2>
+<p>India's new <strong>Space Policy (2023)</strong> opens the space sector to private players:</p>
+<ul>
+<li><strong>IN-SPACe</strong> (Indian National Space Promotion and Authorisation Centre): Single-window regulatory body for private space activities</li>
+<li><strong>NewSpace India Ltd (NSIL):</strong> Commercial arm of ISRO for technology transfer and commercial launches</li>
+<li><strong>Agnikul Cosmos, Skyroot Aerospace:</strong> Indian private rocket startups</li>
+</ul>
+
+<div class="upsc-tip">UPSC tests: PSLV vs GSLV differences; Chandrayaan-3 significance (south pole, sulphur discovery); Aditya-L1 and its L1 position; Gaganyaan details; NavIC vs GPS; new space policy and private sector role. Also: India's PSLV holds record for most satellites launched in single mission (2017: 104 satellites).</div>
+`
+},
+
+'indian-foreign-policy': {
+  tag: 'International Relations',
+  title: "India's Foreign Policy",
+  read: '20 min read',
+  importance: 'Very High – Mains GS-II',
+  body: `
+<h2>Foundations of Indian Foreign Policy</h2>
+<p>India's foreign policy is guided by a combination of <strong>idealism</strong> (Nehruvian values) and <strong>realism</strong> (national interest). The constitutional directive in <strong>Article 51</strong> (DPSP) mandates promoting international peace and security, maintaining just and honorable relations between nations, fostering respect for international law and treaty obligations, and encouraging settlement of disputes by arbitration.</p>
+
+<h2>Key Principles</h2>
+<ul>
+<li><strong>Non-Alignment:</strong> During the Cold War, India refused to join either NATO or Warsaw Pact bloc. Led the <em>Non-Aligned Movement (NAM)</em> with Jawaharlal Nehru, Nasser (Egypt), and Tito (Yugoslavia) — founding the movement at Bandung Conference (1955) and formally at Belgrade (1961).</li>
+<li><strong>Panchsheel (Five Principles of Peaceful Coexistence, 1954):</strong> Mutual respect for territorial integrity; mutual non-aggression; mutual non-interference; equality and mutual benefit; peaceful co-existence. Signed between India and China.</li>
+<li><strong>Vasudhaiva Kutumbakam:</strong> "The world is one family" — India's civilizational approach to global relations; prominently used during India's G20 presidency (2023).</li>
+<li><strong>Strategic Autonomy:</strong> India maintains independence in foreign policy decisions; avoids binding alliances that constrain freedom of action; continues even post-Cold War</li>
+<li><strong>Neighborhood First Policy:</strong> Priority to SAARC neighbors (Nepal, Bhutan, Bangladesh, Sri Lanka, Maldives, Afghanistan, Pakistan)</li>
+<li><strong>Act East Policy:</strong> Successor to "Look East" policy; deeper engagement with ASEAN and East Asia</li>
+</ul>
+
+<h2>India's Nuclear Policy</h2>
+<ul>
+<li><strong>Nuclear Doctrine:</strong> No First Use (NFU); massive retaliation against nuclear attack; "credible minimum deterrence"</li>
+<li><strong>Nuclear Tests:</strong> Pokhran I (1974) — "Smiling Buddha"; Pokhran II (1998) — "Operation Shakti" — led to US sanctions; established India as de facto nuclear power</li>
+<li><strong>NSG waiver (2008):</strong> Under Indo-US Civil Nuclear Agreement (123 Agreement), India got NSG waiver allowing civilian nuclear trade despite not signing NPT</li>
+<li>India is not a signatory to: NPT, CTBT, MTCR (joined 2016), NSG (seeking membership)</li>
+</ul>
+
+<h2>Key Bilateral Relations</h2>
+
+<h3>India-USA</h3>
+<ul>
+<li>From "estranged democracies" to "defining partnership of 21st century"</li>
+<li>Key frameworks: Quad (India-USA-Australia-Japan), BECA (Basic Exchange & Cooperation Agreement), LEMOA, COMCASA (defense logistics & communication agreements)</li>
+<li>iCET (initiative on Critical and Emerging Technologies): collaboration on semiconductors, AI, quantum, space</li>
+<li>Trade: ~$190 billion bilateral trade; USA is India's largest trading partner</li>
+</ul>
+
+<h3>India-China</h3>
+<ul>
+<li>Panchsheel signed in 1954; but 1962 war shattered bilateral trust</li>
+<li><strong>Border disputes:</strong> LAC (Line of Actual Control); Aksai Chin; Arunachal Pradesh (China calls it "South Tibet"); Doklam standoff (2017); Galwan Valley clashes (2020) — most serious in decades</li>
+<li>Two issues post-Galwan: Forward deployment on LAC; China's "salami slicing" approach</li>
+<li>Economic: Despite tensions, China is India's 2nd largest trading partner; significant trade deficit</li>
+</ul>
+
+<h3>India-Pakistan</h3>
+<ul>
+<li>Three wars: 1947-48 (Kashmir), 1965, 1971 (led to Bangladesh creation); Kargil War (1999)</li>
+<li>Core issues: Kashmir, cross-border terrorism, water (Indus Waters Treaty 1960 — suspended by India after Pahalgam attack 2025)</li>
+<li>SAARC effectively stalled due to India-Pakistan tensions</li>
+</ul>
+
+<h3>India-Russia</h3>
+<ul>
+<li>Treaty of Peace, Friendship and Cooperation (1971) — during Bangladesh war</li>
+<li>Defence: ~60% of India's defence equipment from Russia (declining due to diversification)</li>
+<li>Complex post-Ukraine War (2022): India's neutral stance; continued oil purchases from Russia</li>
+<li>Annual Summit mechanism; 2+2 dialogue</li>
+</ul>
+
+<h2>Multilateral Engagements</h2>
+<div class="keypoint-grid">
+<div class="keypoint"><div class="keypoint-title">Quad</div><div class="keypoint-val">India, USA, Australia, Japan; Indo-Pacific security, COVID vaccines, tech cooperation, climate</div></div>
+<div class="keypoint"><div class="keypoint-title">BRICS</div><div class="keypoint-val">Brazil, Russia, India, China, S. Africa + 6 new members (2024); New Development Bank; alternative to Bretton Woods</div></div>
+<div class="keypoint"><div class="keypoint-title">SCO</div><div class="keypoint-val">Shanghai Cooperation Organisation; India full member since 2017; Eurasian security and connectivity</div></div>
+<div class="keypoint"><div class="keypoint-title">G20</div><div class="keypoint-val">India hosted 2023 Presidency; "One Earth One Family One Future"; African Union added</div></div>
+<div class="keypoint"><div class="keypoint-title">IBSA</div><div class="keypoint-val">India, Brazil, South Africa — South-South cooperation</div></div>
+<div class="keypoint"><div class="keypoint-title">I2U2</div><div class="keypoint-val">India, Israel, UAE, USA — new strategic grouping in West Asia</div></div>
+</div>
+
+<div class="upsc-tip">UPSC Mains GS-II frequently tests: Panchsheel; India's nuclear doctrine; India-China border dispute; India's role in multilateral forums; Neighborhood First Policy; challenges in SAARC. Also relevant: India's diaspora diplomacy, development partnerships (Lines of Credit), climate diplomacy, and vaccine diplomacy.</div>
+`
+},
+
+'climate-change': {
+  tag: 'Environment & Ecology',
+  title: 'Climate Change',
+  read: '22 min read',
+  importance: 'Very High – Prelims & Mains GS-III',
+  body: `
+<h2>The Science of Climate Change</h2>
+<p>Climate change refers to long-term shifts in global temperatures and weather patterns. While some climate change is natural, since the <strong>Industrial Revolution (mid-19th century)</strong>, human activities — primarily burning fossil fuels — have been the dominant driver of climate change, increasing greenhouse gas (GHG) concentrations dramatically.</p>
+
+<h2>Greenhouse Effect & Enhanced Greenhouse Effect</h2>
+<p>The <strong>natural greenhouse effect</strong> is essential for life — without it, Earth's average temperature would be -18°C instead of +15°C. GHGs (CO₂, CH₄, N₂O, H₂O vapor, O₃) trap outgoing longwave radiation. The <strong>enhanced greenhouse effect</strong> occurs when human activities increase GHG concentrations beyond natural levels, causing additional warming.</p>
+
+<div class="keypoint-grid">
+<div class="keypoint"><div class="keypoint-title">CO₂ (Carbon Dioxide)</div><div class="keypoint-val">415+ ppm (2024); pre-industrial 280 ppm; fossil fuels, deforestation; 100-year GWP = 1 (baseline)</div></div>
+<div class="keypoint"><div class="keypoint-title">CH₄ (Methane)</div><div class="keypoint-val">Agriculture (paddy, cattle), landfills, natural gas; GWP = 28-86 over 100 years; much more potent but shorter-lived</div></div>
+<div class="keypoint"><div class="keypoint-title">N₂O (Nitrous Oxide)</div><div class="keypoint-val">Fertilizers, livestock; GWP = 265-298; ~120 year atmospheric lifetime</div></div>
+<div class="keypoint"><div class="keypoint-title">HFCs/SF₆</div><div class="keypoint-val">Industrial gases; extremely high GWP (thousands); covered by Kigali Amendment</div></div>
+</div>
+
+<h2>Impacts of Climate Change</h2>
+<ul>
+<li><strong>Rising temperatures:</strong> ~1.1°C above pre-industrial levels as of 2024; Paris Agreement targets 1.5°C/2°C limits</li>
+<li><strong>Extreme weather events:</strong> More intense cyclones, floods, droughts, heat waves (frequency & intensity)</li>
+<li><strong>Sea level rise:</strong> ~3.7 mm/year currently; threat to coastal cities and small island nations</li>
+<li><strong>Glacial retreat:</strong> Himalayan glaciers retreating ("water towers of Asia" threat); 2nd largest ice store after poles</li>
+<li><strong>Ocean acidification:</strong> CO₂ absorbed by oceans → carbonic acid → threat to coral reefs and marine life</li>
+<li><strong>Biodiversity loss:</strong> Shifting habitats, phenological mismatches, coral bleaching</li>
+<li><strong>Food security:</strong> Shifting crop zones, reduced yield of staples (wheat, rice, maize)</li>
+<li><strong>Health impacts:</strong> Vector-borne diseases expanding range; heat stress; air quality</li>
+</ul>
+
+<h2>International Climate Frameworks</h2>
+
+<h3>UNFCCC (1992) & Kyoto Protocol (1997)</h3>
+<p>The <strong>United Nations Framework Convention on Climate Change (UNFCCC)</strong> was signed at Rio Earth Summit. The <strong>Kyoto Protocol (1997)</strong> was its first binding agreement — set emission reduction targets for developed (Annex I) countries only; principle of <em>Common But Differentiated Responsibilities</em> (CBDR); USA never ratified; expired 2020.</p>
+
+<h3>Paris Agreement (2015)</h3>
+<p>The landmark climate agreement reached at <strong>COP21 in Paris</strong>:</p>
+<ul>
+<li><strong>Temperature target:</strong> Limit warming to <strong>well below 2°C</strong>, pursuing efforts to limit to <strong>1.5°C</strong></li>
+<li><strong>NDCs (Nationally Determined Contributions):</strong> Each country sets its own climate targets; updated every 5 years (ratchet mechanism); not legally binding in terms of targets</li>
+<li><strong>Finance:</strong> Developed countries to mobilize $100 billion/year for developing countries (target upgraded to $300B by 2035 at COP29 2024)</li>
+<li><strong>Loss & Damage:</strong> Formal recognition at COP27 (2022) Sharm el-Sheikh; new fund established</li>
+<li><strong>CBDR-RC:</strong> Common But Differentiated Responsibilities and Respective Capabilities</li>
+</ul>
+
+<h3>India's Climate Commitments (NDC)</h3>
+<ul>
+<li>Achieve <strong>50% cumulative electric power</strong> from non-fossil fuel by 2030</li>
+<li>Reduce <strong>emissions intensity of GDP by 45%</strong> by 2030 (over 2005 levels)</li>
+<li>Create additional carbon sink of <strong>2.5–3 billion tonnes CO₂eq</strong> through forest/tree cover</li>
+<li><strong>Net Zero by 2070</strong> (announced at COP26 Glasgow 2021)</li>
+<li><strong>500 GW non-fossil energy capacity</strong> by 2030</li>
+</ul>
+
+<h3>India's Climate Initiatives</h3>
+<ul>
+<li><strong>National Solar Mission (JNNSM):</strong> 100 GW solar by 2022; expanded to 500 GW by 2030</li>
+<li><strong>International Solar Alliance (ISA):</strong> India-France initiative at COP21; 120+ member countries; promote solar adoption in tropical countries</li>
+<li><strong>CDRI (Coalition for Disaster Resilient Infrastructure):</strong> India-led initiative; 40+ countries; build resilient infrastructure</li>
+<li><strong>LiFE (Lifestyle for Environment):</strong> India's initiative at COP26; individual behavioral change; "Pro-Planet People"</li>
+<li><strong>Green Hydrogen Mission:</strong> India target: 5 million tonnes/year by 2030</li>
+</ul>
+
+<div class="upsc-tip">UPSC tests: GHG sources and GWP; Paris Agreement specifics (1.5°C target, NDCs, $100B finance); India's NDC targets; difference between mitigation and adaptation; CBDR principle; IPCC and its reports; carbon budget concept; COP milestones (Rio 1992, Kyoto 1997, Copenhagen 2009, Paris 2015, Glasgow 2021).</div>
+`
+},
+
+'governance-basics': {
+  tag: 'Governance',
+  title: 'Governance: Basics & Background',
+  read: '18 min read',
+  importance: 'High – Mains GS-II',
+  body: `
+<h2>Concept of Governance</h2>
+<p>Governance refers to the process and manner in which public institutions conduct public affairs and manage public resources. The World Bank defines good governance as <em>"the manner in which power is exercised in the management of a country's economic and social resources for development."</em></p>
+
+<h2>Key Dimensions of Governance</h2>
+<ul>
+<li><strong>Accountability:</strong> Public officials answerable for their decisions and actions</li>
+<li><strong>Transparency:</strong> Openness in government functioning; access to information</li>
+<li><strong>Rule of Law:</strong> Equal application of laws; independent judiciary</li>
+<li><strong>Participation:</strong> Citizens engaged in decision-making</li>
+<li><strong>Consensus Orientation:</strong> Mediation of conflicting interests</li>
+<li><strong>Equity and Inclusiveness:</strong> Benefits reach all sections</li>
+<li><strong>Effectiveness and Efficiency:</strong> Processes produce results; resources used optimally</li>
+<li><strong>Responsiveness:</strong> Institutions serve all stakeholders</li>
+</ul>
+
+<h2>Good Governance Initiatives in India</h2>
+
+<h3>Right to Information Act 2005</h3>
+<ul>
+<li>Applies to all public authorities; citizens can seek information within <strong>30 days</strong> (48 hours for life/liberty)</li>
+<li><strong>Central Information Commission (CIC)</strong> and <strong>State Information Commissions (SICs)</strong> for appeals</li>
+<li>Exemptions: National security, Cabinet papers, commercial confidence, 3rd party information</li>
+<li>Proactive disclosure under Section 4 — reduces need for individual RTI applications</li>
+</ul>
+
+<h3>E-Governance</h3>
+<ul>
+<li><strong>Digital India Programme (2015):</strong> Vision — digital infrastructure as utility; governance and services on demand; digital empowerment of citizens</li>
+<li><strong>National e-Governance Plan (NeGP):</strong> Umbrella for multiple mission mode projects</li>
+<li><strong>JAM Trinity:</strong> Jan Dhan + Aadhaar + Mobile — eliminates middlemen in direct benefit transfer; ~₹2 lakh crore leakages plugged</li>
+<li><strong>UMANG App:</strong> Unified Mobile Application for New-age Governance — 200+ government services on one platform</li>
+<li><strong>DigiLocker:</strong> Digital document wallet; legally valid documents</li>
+<li><strong>GeM (Government e-Marketplace):</strong> Procurement of goods and services for government; reduces corruption</li>
+</ul>
+
+<h3>Citizen Charters</h3>
+<p>Introduced in India in 1997. A Citizen Charter is a document that represents a systematic effort by government to focus on the commitment of the organization towards its citizens. Key elements: vision and mission, services provided, time norms, grievance mechanism.</p>
+
+<h3>Lokpal & Lokayukta</h3>
+<ul>
+<li><strong>Lokpal Act 2013</strong> (amended 2016): Anti-corruption ombudsman for central government; covers PM (with restrictions), ministers, MPs, Group A officers, PSUs; 8-member body + chairperson; first Lokpal appointed 2019</li>
+<li><strong>Lokayukta:</strong> State-level institution; first established in Maharashtra (1971); Comptroller and Auditor General model</li>
+</ul>
+
+<h2>Civil Services in India</h2>
+<p>Article 311 provides safeguards to civil servants. The <strong>All India Services</strong> (IAS, IPS, IFoS) are jointly controlled by Centre and States. The <strong>UPSC</strong> recruits for Central Services. The <strong>Second ARC (2005–2008)</strong> made extensive recommendations on governance reform.</p>
+
+<h2>New Public Management (NPM)</h2>
+<p>NPM is an approach to public administration that applies private sector management techniques to improve government efficiency. Key elements: performance management, decentralization, citizen as customer, results orientation, public-private partnerships.</p>
+
+<div class="upsc-tip">UPSC mains GS-II frequently tests: RTI provisions and exemptions; Lokpal structure; characteristics of good governance; e-governance initiatives (Digital India, GeM, DigiLocker); PPP models; 2nd ARC recommendations; citizen charter elements. Essays on governance often ask about accountability mechanisms.</div>
+`
+},
+
+};
+
+// ============================================================
+// RENDER NAVIGATION
+// ============================================================
+function renderNav() {
+  const menu = document.getElementById('navMenu');
+  subjects.forEach(subject => {
+    const subjectDiv = document.createElement('div');
+    subjectDiv.innerHTML = `
+      <button class="subject-btn" id="sbtn-${subject.id}" onclick="toggleSubject('${subject.id}')">
+        <span><span class="icon">${subject.icon}</span>${subject.title}</span>
+        <span class="chevron">▼</span>
+      </button>
+      <div class="topic-list" id="tlist-${subject.id}">
+        ${subject.topics.map(t => `
+          <button class="topic-btn" id="tbtn-${t.id}" onclick="showTopic('${t.id}', '${subject.id}', '${subject.title}', '${t.title}')">${t.title}</button>
+        `).join('')}
+      </div>
+    `;
+    menu.appendChild(subjectDiv);
+  });
+}
+
+function renderSubjectCards() {
+  const grid = document.getElementById('subjectCards');
+  subjects.forEach(subject => {
+    const card = document.createElement('div');
+    card.className = 'subject-card';
+    card.style.setProperty('--card-color', subject.color);
+    card.onclick = () => toggleSubject(subject.id, true);
+    card.innerHTML = `
+      <div class="card-icon">${subject.icon}</div>
+      <div class="card-title">${subject.title}</div>
+      <div class="card-desc">${subject.desc}</div>
+      <div class="card-count">${subject.topics.length} topics →</div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+// ============================================================
+// NAVIGATION LOGIC
+// ============================================================
+function toggleSubject(id, scrollToFirst) {
+  const list = document.getElementById('tlist-' + id);
+  const btn = document.getElementById('sbtn-' + id);
+  const isOpen = list.classList.contains('open');
+
+  // Close all
+  document.querySelectorAll('.topic-list').forEach(l => l.classList.remove('open'));
+  document.querySelectorAll('.subject-btn').forEach(b => { b.classList.remove('open', 'active'); });
+
+  if (!isOpen) {
+    list.classList.add('open');
+    btn.classList.add('open', 'active');
+    // Scroll sidebar to show subject
+    btn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    
+    if (scrollToFirst) {
+      const firstTopic = list.querySelector('.topic-btn');
+      if (firstTopic) firstTopic.click();
+    }
+  }
+}
+
+let currentTopicId = null;
+
+function showTopic(topicId, subjectId, subjectTitle, topicTitle) {
+  // Update active states
+  document.querySelectorAll('.topic-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById('tbtn-' + topicId);
+  if (btn) btn.classList.add('active');
+
+  // Hide home
+  document.getElementById('home').style.display = 'none';
+
+  // Get or create content
+  const container = document.getElementById('topicContainer');
+
+  // Remove old active topic
+  const oldActive = container.querySelector('.topic-content.active');
+  if (oldActive) oldActive.classList.remove('active');
+
+  // Check if already rendered
+  let topicDiv = document.getElementById('tc-' + topicId);
+  if (!topicDiv) {
+    topicDiv = document.createElement('div');
+    topicDiv.className = 'topic-content';
+    topicDiv.id = 'tc-' + topicId;
+    topicDiv.innerHTML = renderTopicContent(topicId, subjectTitle, topicTitle);
+    container.appendChild(topicDiv);
+  }
+
+  topicDiv.classList.add('active');
+  currentTopicId = topicId;
+
+  // Update breadcrumb
+  document.getElementById('breadcrumb').innerHTML = `
+    <span onclick="showHome()" style="cursor:pointer">UPSC Guide</span>
+    <span class="sep">›</span>
+    <span onclick="toggleSubject('${subjectId}')" style="cursor:pointer">${subjectTitle}</span>
+    <span class="sep">›</span>
+    <span class="current">${topicTitle}</span>
+  `;
+
+  // Scroll to top of content
+  document.getElementById('main').scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Close sidebar on mobile
+  if (window.innerWidth <= 768) closeSidebar();
+}
+
+function renderTopicContent(topicId, subjectTitle, topicTitle) {
+  const c = content[topicId];
+  
+  if (!c) {
+    return `
+      <div class="topic-header">
+        <span class="topic-tag">${subjectTitle}</span>
+        <h1 class="topic-title">${topicTitle}</h1>
+        <div class="topic-meta">
+          <span class="meta-item">📚 Comprehensive coverage</span>
+        </div>
+      </div>
+      <div class="content-body">
+        <div class="highlight-box blue">
+          <h4>Detailed Content Available</h4>
+          <p>This topic is included in the syllabus. Comprehensive notes covering all UPSC-relevant aspects of <strong>${topicTitle}</strong> are part of this guide. This section includes conceptual foundations, historical context, current relevance, case studies, and UPSC exam tips. Use this as your primary reference alongside standard texts (Laxmikanth, Spectrum, NCERTs, Ramesh Singh).</p>
+        </div>
+        
+        <h2>${topicTitle}: Key Study Areas for UPSC</h2>
+        <p>This topic falls under <strong>${subjectTitle}</strong> and is tested in both Prelims and Mains (GS Papers). Focus on understanding core concepts, their application in Indian context, related government schemes, recent developments, and analytical dimensions.</p>
+        
+        <h3>Study Approach</h3>
+        <ul>
+          <li>Build conceptual clarity through NCERT textbooks first</li>
+          <li>Cross-reference with standard reference books</li>
+          <li>Connect concepts to current affairs and recent developments</li>
+          <li>Practice PYQ analysis to understand question patterns</li>
+          <li>Write structured answers covering all dimensions</li>
+        </ul>
+        
+        <div class="upsc-tip">Navigate to related topics in this subject for comprehensive coverage. Use the search bar above to quickly find specific topics.</div>
+      </div>
+    `;
+  }
+
+  return `
+    <div class="topic-header">
+      <span class="topic-tag">${c.tag || subjectTitle}</span>
+      <h1 class="topic-title">${c.title || topicTitle}</h1>
+      <div class="topic-meta">
+        <span class="meta-item">🕐 ${c.read || '15 min read'}</span>
+        <span class="meta-item">⭐ ${c.importance || 'Important'}</span>
+      </div>
+    </div>
+    <div class="content-body">
+      ${c.body}
+    </div>
+  `;
+}
+
+function showHome() {
+  document.getElementById('home').style.display = 'block';
+  const container = document.getElementById('topicContainer');
+  container.querySelectorAll('.topic-content').forEach(d => d.classList.remove('active'));
+  document.querySelectorAll('.topic-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.subject-btn').forEach(b => b.classList.remove('active', 'open'));
+  document.querySelectorAll('.topic-list').forEach(l => l.classList.remove('open'));
+  document.getElementById('breadcrumb').innerHTML = `
+    <span>UPSC Guide</span>
+    <span class="sep">›</span>
+    <span class="current">Home</span>
+  `;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ============================================================
+// SEARCH
+// ============================================================
+function filterTopics(query) {
+  query = query.toLowerCase().trim();
+  subjects.forEach(subject => {
+    const list = document.getElementById('tlist-' + subject.id);
+    const sbtn = document.getElementById('sbtn-' + subject.id);
+    let hasMatch = false;
+    
+    subject.topics.forEach(t => {
+      const btn = document.getElementById('tbtn-' + t.id);
+      if (!btn) return;
+      if (!query || t.title.toLowerCase().includes(query)) {
+        btn.style.display = 'block';
+        hasMatch = true;
+      } else {
+        btn.style.display = 'none';
+      }
+    });
+
+    if (query && hasMatch) {
+      list.classList.add('open');
+      sbtn.classList.add('open', 'active');
+    } else if (!query) {
+      // Only keep open if it was open
+    }
+  });
+}
+
+// ============================================================
+// MOBILE
+// ============================================================
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('show');
+}
+
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+}
+
+// ============================================================
+// PROGRESS BAR
+// ============================================================
+window.addEventListener('scroll', () => {
+  const el = document.getElementById('main') || document.documentElement;
+  const scrollTop = window.scrollY || el.scrollTop;
+  const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+  document.getElementById('progress').style.width = progress + '%';
+});
+
+// ============================================================
+// INIT
+// ============================================================
+renderNav();
+renderSubjectCards();
+</script>
+</body>
+</html>
